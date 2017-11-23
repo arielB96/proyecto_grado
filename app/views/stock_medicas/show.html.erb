@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Fecha de Entrega:</strong>
+  <%= @stock_medica.fechaEntrega %>
+</p>
+
+<p>
+  <strong>Cantidad:</strong>
+  <%= @stock_medica.cantidad%>
+</p>
+<p>
+  <strong>Medicamento:</strong>
+  <%= @stock_medica.medicamento.nombreMedi %>
+</p>
+<p>
+  <strong>Nombre Paciente:</strong>
+  <%= @stock_medica.ficha_medica.nombre %>
+</p>
+
+
+<%= link_to 'Edit', edit_stock_medica_path(@stock_medica) %> |
+<%= link_to 'Back', stock_medicas_path %>

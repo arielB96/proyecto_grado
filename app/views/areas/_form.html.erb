@@ -1,0 +1,11 @@
+<%= form_with(model: area, local: true) do |form| %>
+ 
+  <div class="field">
+    <%= form.label :area %>
+    <%= form.text_field :area, id: :area_area %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

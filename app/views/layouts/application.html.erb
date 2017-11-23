@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fichas Medicas</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
+  </head>
+
+  <body>
+  <div class="container">
+    <!-- inser bootstrapp para el nav que aparecera en toda la pagina -->
+    <% if user_signed_in? %>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/diagnosticos"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Consultas</a>
+          </div>
+  
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="/ficha_medicas" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ficha <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/ficha_medicas/new">Nueva Ficha</a></li>
+                <li><a href="/ficha_medicas">Fichas Medicas</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="stock_medicas" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Medicamentos<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/medicamentos/new">Nuevo Medicamento</a></li>
+                <li><a href="/medicamentos">Cantidad de Medicamentos</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informe<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/medicamentos/new">Medicamento</a></li>
+                <li><a href="/medicamentos">Lista de Medicamentos</a></li>
+                <li><a href="/stock_medicas/new">Entregar Medicamento</a></li>
+                <li><a href="/stock_medicas">Medicamentos Entregados</a></li>
+                
+              </ul>
+            </li>
+          </ul>
+      
+    
+                    <ul class="nav navbar-nav navbar-right">
+                       <p class="navbar-text pull-right">
+                          <% if user_signed_in? %>
+                          <%= link_to "Cerrar Sesion", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+                          <% else %>
+                          <%= link_to "Iniciar Sesion", new_user_session_path, :class => 'navbar-link'  %>
+                          <% end %>
+                       </p>
+                    </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <% end %>
+
+<%= yield %>
+  
+<script type="text/javascript">
+  
+$("#select_puesto_salud" ).change(function() {
+  var id = $('#select_puesto_salud').val();
+
+  $.ajax({
+          type:'GET', 
+          url: '/puesto_saluds/getInfo',
+          data: {"id": id},
+
+          success: function(data) {
+            console.log(data.nombre);
+            $('#disabledTextInput').val(data.localidad);
+            $('#tbDistrito').val(data.distrito);
+            $('#tbRegion').val(data.regionSanitaria);
+              console.log(data);
+              
+          },
+          error: function(data) {
+                alert('error');
+          }
+
+           //data: $.param({ pagetime: {pagename: "whatever", start: 7, end: 21 }})
+      });
+
+});
+
+
+</script>
+

@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Ficha Docs</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Nombre </th>
+      <th>Apellido</th>
+      <th>Motivoconsul</th>
+      <th>Examenfisico</th>
+      <th>Otrodiagnos</th>
+      <th>Tratamiento</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ficha_docs.each do |ficha_doc| %>
+      <tr>
+        <td><%= ficha_doc.diagnostico.ficha_medica.nombre %></td>
+        <td><%= ficha_doc.diagnostico.ficha_medica.apellido %></td>
+        <td><%= ficha_doc.examenFisico %></td>
+        <td><%= ficha_doc.otroDiagnos %></td>
+        <td><%= ficha_doc.tratamiento %></td>
+        <td><%= link_to 'Show', ficha_doc %></td>
+        <td><%= link_to 'Edit', edit_ficha_doc_path(ficha_doc) %></td>
+        <td><%= link_to 'Destroy', ficha_doc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ficha Doc', new_ficha_doc_path %>

@@ -1,0 +1,2 @@
+module ViewConsultaHelper
+end

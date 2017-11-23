@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Nivel Academicos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nivelacdemico</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nivel_academicos.each do |nivel_academico| %>
+      <tr>
+        <td><%= nivel_academico.nivelAcdemico %></td>
+        <td><%= link_to 'Show', nivel_academico %></td>
+        <td><%= link_to 'Edit', edit_nivel_academico_path(nivel_academico) %></td>
+        <td><%= link_to 'Destroy', nivel_academico, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Nivel Academico', new_nivel_academico_path %>

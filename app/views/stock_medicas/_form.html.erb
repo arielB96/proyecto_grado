@@ -1,0 +1,37 @@
+<%= form_with(model: stock_medica, local: true) do |form| %>
+  <% if stock_medica.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(stock_medica.errors.count, "error") %> prohibited this stock_medica from being saved:</h2>
+
+      <ul>
+      <% stock_medica.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <div class="col-md-4"></div>
+ <div class="col-md-4">
+
+  <label>Nombre del Paciente</label>
+        <%= form.collection_select(:ficha_medica_id, @ficha_medicas, :id, :nombre,  {include_blank: 'Nombre del Paciente' }, {:class=>'form-control'}) %>
+  <label>Medicamento</label>
+        <%= form.collection_select(:medicamento_id, @medicamentos, :id, :nombreMedi, {include_blank: 'Nombre del Medicamento' }, {:class=>'form-control'}) %>
+  <div class="field">
+    <%= form.label :cantidad %>
+    <%= form.number_field :cantidad, id: :stock_medica_cantidad, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= form.label :fechaEntrega %>
+    <%= form.date_field :fechaEntrega, id: :stock_medica_fechaEntrega, class: "form-control", :order => [:day, :month, :year] %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Guardar", class: "btn btn-success" %>
+    <%= link_to 'Atras', stock_medicas_path , class: "btn btn-info"  %>
+
+  </div>
+<% end %>
+</div>
+
+<div class="col-md-4"></div>

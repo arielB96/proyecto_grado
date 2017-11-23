@@ -1,0 +1,81 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Medicamentos</h1>
+<div class= "col-md-10"></div>
+<!-- <div class="col-md-2">
+<%= link_to '', new_medicamento_path , class: "btn btn-success fa fa-plus"%>
+</div> -->
+<table id="medi_tabla"  class="table table-hover">
+  <thead>
+    <tr>
+      <th>Fecha de Entrada</th>
+      <th>Fecha de Vencimiento</th>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Cantidad</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @medicamentos.each do |medicamento| %>
+      <tr>
+        <td><%= medicamento.fechaEntrada %></td>
+        <td><%= medicamento.fechaVencimiento %></td>
+        <td><%= medicamento.nombreMedi %></td>
+        <td><%= medicamento.descripcion %></td>
+        <td><span class="badge badge-pill badge-primary"><%= medicamento.cantidad %></span></td>
+
+        <td><%= link_to 'Show', medicamento %></td>
+        <td><%= link_to 'Edit', edit_medicamento_path(medicamento) %></td>
+        <td><%= link_to 'Destroy', medicamento, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+
+    <% end %>
+  </tbody>
+</table>
+
+ <script type="text/javascript">
+    //
+
+    $(document).ready(function() {
+    $('#medi_tabla').DataTable( {
+        responsive: true,
+        "bProcessing": true,
+        //"sPaginationType": "full_numbers",
+        "paging": true,
+        "iDisplayLength": 10,
+        "bPaginate": true,
+        "bSort": true,
+        "oLanguage": {
+            "oPaginate": {
+                "sPrevious": "←",
+                "sNext": "→",
+                "sLast": "»",
+                "sFirst": "«"
+            },
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando de _START_ al _END_ de _TOTAL_ registros",
+            //"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando del 0 al 0 de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar: ",
+            "sUrl": "",
+            "sInfoThousands": ".",
+            "sLoadingRecords": "Cargando...",
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    } );
+    } );
+    
+  </script>
+

@@ -1,0 +1,45 @@
+<%= form_with(model: medicamento, local: true) do |form| %>
+  <% if medicamento.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(medicamento.errors.count, "error") %> prohibited this medicamento from being saved:</h2>
+
+      <ul>
+      <% medicamento.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+  <h2>Nuevo Medicamento</h2>
+  <div class="field">
+    <%= form.label :fechaEntrada, "Fecha de Entrada" %>
+    <%= form.date_field :fechaEntrada, id: :medicamento_fechaEntrada, class: "form-control", :validate => true, :order => [:day, :month, :year] %>
+  </div>
+  <div class="field">
+    <%= form.label :fechaVencimiento, "Fecha de Vencimiento" %>
+    <%= form.date_field :fechaVencimiento, id: :medicamento_fechaVencimiento, class: "form-control"  %>
+  </div>
+  <div class="field">
+    <%= form.label :nombreMedi, "Nombre del Medicamento" %>
+    <%= form.text_field :nombreMedi, id: :medicamento_nombreMedi, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descripcion, "Descripción" %>
+    <%= form.text_area :descripcion, id: :medicamento_descripcion, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cantidad, "Cantidad" %>
+    <%= form.number_field :cantidad, id: :medicamento_cantidad, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Guardar', class: "btn btn-success" %>
+    <%= link_to 'Atras', medicamentos_path, class: "btn btn-info" %>
+  </div>
+<% end %>
+</div>
+<div class="col-md-4"></div>

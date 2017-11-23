@@ -1,0 +1,117 @@
+<%= form_with(model: diagnostico, local: true) do |f| %>
+  <% if diagnostico.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(diagnostico.errors.count, "error") %> prohibited this diagnostico from being saved:</h2>
+
+      <ul>
+      <% diagnostico.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+
+          <div class="col-sm-3">
+            <%= f.label :fecha , "Fecha" %>
+            <%= f.date_field :fecha, id: :diagnostico_fecha, class: "form-control" %>
+          </div>
+          <DIV CLASS="col-sm-4">
+            <%= f.submit 'Guardar', class: "btn btn-success" %>
+          </DIV>
+         
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <%= f.label :axilaRectal, "Axila Rectal" %>
+            <%= f.text_field :axilaRectal, id: :diagnostico_axilaRectal , class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-2">
+            <%= f.label :presionArterial, "Presion Arterial" %>
+            <%= f.text_field :presionArterial, id: :diagnostico_presionArterial , class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-2">
+            <%= f.label :pulso, "Pulso" %>
+            <%= f.text_field :pulso, id: :diagnostico_pulso, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :freCardiaca, "Frecuencia Cardiaca" %>
+            <%= f.text_field :freCardiaca, id: :diagnostico_freCardiaca, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :freRespi, "Frecuencia Respiratoria" %>
+            <%= f.text_field :freRespi, id: :diagnostico_freRespi, class: "form-control"  %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <%= f.label :peso, "Peso" %>
+            <%= f.text_field :peso, id: :diagnostico_peso, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-2">
+            <%= f.label :talla, "Talla" %>
+            <%= f.text_field :talla, id: :diagnostico_talla, class: "form-control"  %>
+          </div>
+          <div class="col-sm-3">
+            <%= f.label :perimeCefalico, "Perimetro Cefalico" %>
+            <%= f.text_field :perimeCefalico, id: :diagnostico_perimeCefalico, class: "form-control"  %>
+          </div>
+          <div class="col-sm-3">
+            <%= f.label :masaCorpo, "Masa Corporal" %>
+            <%= f.text_field :masaCorpo, id: :diagnostico_masaCorpo, class: "form-control"  %>
+          </div>
+          </div>
+          <div class="row">
+
+          <div class="col-sm-3">
+            <%= f.label :circuAbdomi, "Circunferencia Abdominal" %>
+            <%= f.text_field :circuAbdomi, id: :diagnostico_circuAbdomi, class: "form-control"  %>
+          </div>
+          
+          <div class="col-sm-3">
+            <%= f.label :estadNutricional, "Estado Nutricional" %>
+            <%= f.text_field :estadNutricional, id: :diagnostico_estadNutricional, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :alimentacion, "Alimentación" %>
+            <%= f.text_field :alimentacion, id: :diagnostico_alimentacion, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :desarrolloMadura, "Desarrollo Madurativo" %>
+            <%= f.text_field :desarrolloMadura, id: :diagnostico_desarrolloMadura, class: "form-control"  %>
+          </div>
+          </div>
+          <div class="row">
+          <div class="col-sm-2">
+            <%= f.label :tanner, "Tanner" %>
+            <%= f.text_field :tanner, id: :diagnostico_tanner, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :vacucacionVigente, "Vacunacion Vigente" %>
+            <%= f.text_field :vacucacionVigente, id: :diagnostico_vacucacionVigente, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-4">
+            <%= f.label :areaTecEspecialidades, "Area Tecnica Especialidades" %>
+            <%= f.text_field :areaTecEspecialidades, id: :diagnostico_areaTecEspecialidades, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-2">
+            <%= f.label :nuevo, "Nuevo" %>
+            <%= f.text_field :nuevo, id: :diagnostico_nuevo, class: "form-control"  %>
+          </div>
+          <div>
+            <%= f.label :consultar %>
+            <%= f.check_box :consultar, id: :diagnostico_consultar %>
+          </div>
+      </div>
+<% end %>

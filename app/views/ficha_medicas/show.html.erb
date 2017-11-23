@@ -1,0 +1,227 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+    <div class="col-md-3">
+      <p>
+        <strong>Ficha Numero:</strong>
+         <%= @ficha_medica.numero %>
+      </p>
+      <p>
+        <strong>C.I.Nº:</strong>
+         <%= @ficha_medica.ci %>
+      </p>
+      <p>
+        <strong>Nombre:</strong>
+        <%= @ficha_medica.nombre %>
+      </p>
+      <p>
+        <strong>Apellido:</strong>
+        <%= @ficha_medica.apellido %>
+      </p>
+      <p>
+        <strong>Edad:</strong>
+        <%= @ficha_medica.edad %>
+      </p>
+     
+     
+       
+      
+      
+      <%= link_to 'Editar', edit_ficha_medica_path(@ficha_medica) %> |
+      <%= link_to 'Atras', ficha_medicas_path %>
+  </div>
+<div class="col-md-9">
+  <div class="row">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Nueva Consulta</button><BR><br>
+  <table id="diagnostico_tabla" class="table table-hover">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Peso</th>
+      <th>Consultar</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  
+    <% @ficha_medica.diagnosticos.each do |consultas| %>
+      <tr>
+        <td><%= consultas.fecha %></td>
+        <td><%= consultas.peso %></td>
+        <td><%= consultas.consultar %></td>
+        <td><%= link_to 'Show', consultas %></td>
+       </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="modal fade bs-example-modal-lg2" tabindex="1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">Detalle de la Consulta</h4>
+      </div>
+      <div class="modal-body">
+        Aqui se cargara la caracteristica de la Cunsulta
+      </div>
+    </div>
+  </div>
+</div>
+      
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">Nueva Consulta</h4>
+      </div>
+      <div class="modal-body">
+      <%= form_for([@ficha_medica, @ficha_medica.diagnosticos.build]) do |f| %>
+        <div class="row">
+
+          <div class="col-sm-3">
+            <%= f.label :fecha , "Fecha" %>
+            <%= f.date_field :fecha, id: :diagnostico_fecha, class: "form-control" %>
+          </div>
+          <DIV CLASS="col-sm-4">
+            <%= f.submit 'Guardar', class: "btn btn-success" %>
+          </DIV>
+         
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <%= f.label :axilaRectal, "Axila Rectal" %>
+            <%= f.text_field :axilaRectal, id: :diagnostico_axilaRectal , class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-2">
+            <%= f.label :presionArterial, "Presion Arterial" %>
+            <%= f.text_field :presionArterial, id: :diagnostico_presionArterial , class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-2">
+            <%= f.label :pulso, "Pulso" %>
+            <%= f.text_field :pulso, id: :diagnostico_pulso, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :freCardiaca, "Frecuencia Cardiaca" %>
+            <%= f.text_field :freCardiaca, id: :diagnostico_freCardiaca, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :freRespi, "Frecuencia Respiratoria" %>
+            <%= f.text_field :freRespi, id: :diagnostico_freRespi, class: "form-control"  %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <%= f.label :peso, "Peso" %>
+            <%= f.text_field :peso, id: :diagnostico_peso, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-2">
+            <%= f.label :talla, "Talla" %>
+            <%= f.text_field :talla, id: :diagnostico_talla, class: "form-control"  %>
+          </div>
+          <div class="col-sm-3">
+            <%= f.label :perimeCefalico, "Perimetro Cefalico" %>
+            <%= f.text_field :perimeCefalico, id: :diagnostico_perimeCefalico, class: "form-control"  %>
+          </div>
+          <div class="col-sm-3">
+            <%= f.label :masaCorpo, "Masa Corporal" %>
+            <%= f.text_field :masaCorpo, id: :diagnostico_masaCorpo, class: "form-control"  %>
+          </div>
+          </div>
+          <div class="row">
+
+          <div class="col-sm-3">
+            <%= f.label :circuAbdomi, "Circunferencia Abdominal" %>
+            <%= f.text_field :circuAbdomi, id: :diagnostico_circuAbdomi, class: "form-control"  %>
+          </div>
+          
+          <div class="col-sm-3">
+            <%= f.label :estadNutricional, "Estado Nutricional" %>
+            <%= f.text_field :estadNutricional, id: :diagnostico_estadNutricional, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :alimentacion, "Alimentación" %>
+            <%= f.text_field :alimentacion, id: :diagnostico_alimentacion, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :desarrolloMadura, "Desarrollo Madurativo" %>
+            <%= f.text_field :desarrolloMadura, id: :diagnostico_desarrolloMadura, class: "form-control"  %>
+          </div>
+          </div>
+          <div class="row">
+          <div class="col-sm-2">
+            <%= f.label :tanner, "Tanner" %>
+            <%= f.text_field :tanner, id: :diagnostico_tanner, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-3">
+            <%= f.label :vacucacionVigente, "Vacunacion Vigente" %>
+            <%= f.text_field :vacucacionVigente, id: :diagnostico_vacucacionVigente, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-4">
+            <%= f.label :areaTecEspecialidades, "Area Tecnica Especialidades" %>
+            <%= f.text_field :areaTecEspecialidades, id: :diagnostico_areaTecEspecialidades, class: "form-control"  %>
+          </div>
+
+          <div class="col-sm-2">
+            <%= f.label :nuevo, "Nuevo" %>
+            <%= f.text_field :nuevo, id: :diagnostico_nuevo, class: "form-control"  %>
+          </div>
+          <div>
+            <%= f.label :consultar %>
+            <%= f.check_box :consultar, id: :diagnostico_consultar %>
+          </div>
+      </div>
+    <%end%>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('#diagnostico_tabla').DataTable( {
+        responsive: true,
+        "bProcessing": true,
+        //"sPaginationType": "full_numbers",
+        "paging": true,
+        "iDisplayLength": 10,
+        "bPaginate": true,
+        "bSort": true,
+        "oLanguage": {
+            "oPaginate": {
+                "sPrevious": "←",
+                "sNext": "→",
+                "sLast": "»",
+                "sFirst": "«"
+            },
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando de _START_ al _END_ de _TOTAL_ registros",
+            //"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando del 0 al 0 de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar: ",
+            "sUrl": "",
+            "sInfoThousands": ".",
+            "sLoadingRecords": "Cargando...",
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    } );
+    } );
+  </script>

@@ -1,0 +1,81 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+ <div class="col-md-3">
+       <div class="">
+        <strong>Fecha:</strong>
+         <%= @diagnostico.fecha %>
+      </div>
+      <div>
+        <strong>Axila Rectal:</strong>
+         <%= @diagnostico.axilaRectal %>
+      </div>
+      <div>
+        <strong>Presion Arterial:</strong>
+        <%= @diagnostico.presionArterial %>
+      </div>
+      <div>
+        <strong>Frecuencia Cardiaca:</strong>
+        <%= @diagnostico.freCardiaca %>
+      </div>
+      
+      <div>
+        <strong>Nombre:</strong>
+        <%= @diagnostico.ficha_medica.nombre %>
+        <strong>Apellido:</strong>
+        <%= @diagnostico.ficha_medica.apellido %>
+      </div>
+  </div>
+  <div class="col-md-9">
+    <!-- <table id="diagnostico_tabla" class="table table-hover">
+      <thead>
+        <tr>
+          <th>Tratamiento</th>
+          <th>Motivo de la Consulta</th>
+          <th>Examen Fisico</th>
+        </tr>
+      </thead>
+
+      <tbody data-toggle="modal" data-target=".bs-example-modal-lg2" >
+      
+        <% @diagnostico.ficha_docs.each do |p| %>
+          <tr>
+            <td><%= p.tratamiento %></td>
+            <td><%= p.motivoConsul %></td>
+            <td><%= p.examenFisico %></td>
+           </tr>
+        <% end %>
+      </tbody>
+    </table> -->
+  </div>
+</div>
+<div class="row">
+
+        <%= form_for([@diagnostico, @diagnostico.ficha_docs.build]) do |f| %>
+          <div class="col-sm-6">
+            <%= f.label :motivoConsul, 'Motivo de la Consulta' %>
+            <%= f.text_area :motivoConsul, id: :ficha_doc_motivoConsulc, class: "form-control" %>
+          </div>
+
+          <div class="col-sm-6">
+            <%= f.label :examenFisico, 'Examen Fisico' %>
+            <%= f.text_area :examenFisico, id: :ficha_doc_examenFisico, class: "form-control" %>
+          </div>
+
+          <div class="col-sm-6">
+            <%= f.label :otroDiagnos, 'Otros Diagnosticos' %>
+            <%= f.text_area :otroDiagnos, id: :ficha_doc_otroDiagnos, class: "form-control" %>
+          </div>
+
+          <div class="col-sm-6">
+            <%= f.label :tratamiento, 'Tratamiento' %>
+            <%= f.text_area :tratamiento, id: :ficha_doc_tratamiento, class: "form-control" %><BR>
+
+            <%= f.submit 'Guardar' , class: "btn btn-success"%>
+          </div>
+         
+</div>
+      <% end -%>
+
+
+<%= link_to 'Edit', edit_diagnostico_path(@diagnostico) %> |
+<%= link_to 'Back', diagnosticos_path %>

@@ -1,0 +1,2 @@
+class ViewConsulta < ApplicationRecord
+end

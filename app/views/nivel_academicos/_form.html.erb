@@ -1,0 +1,22 @@
+<%= form_with(model: nivel_academico, local: true) do |form| %>
+  <% if nivel_academico.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(nivel_academico.errors.count, "error") %> prohibited this nivel_academico from being saved:</h2>
+
+      <ul>
+      <% nivel_academico.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nivelAcdemico %>
+    <%= form.text_field :nivelAcdemico, id: :nivel_academico_nivelAcdemico %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

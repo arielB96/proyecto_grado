@@ -1,0 +1,42 @@
+<%= form_with(model: ficha_doc, local: true) do |form| %>
+  <% if ficha_doc.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ficha_doc.errors.count, "error") %> prohibited this ficha_doc from being saved:</h2>
+
+      <ul>
+      <% ficha_doc.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :motivoConsul %>
+    <%= form.text_area :motivoConsul, id: :ficha_doc_motivoConsul %>
+  </div>
+
+  <div class="field">
+    <%= form.label :diagnostico %>
+    <%= form.text_area :diagnostico, id: :ficha_doc_diagnostico %>
+  </div>
+
+  <div class="field">
+    <%= form.label :examenFisico %>
+    <%= form.text_area :examenFisico, id: :ficha_doc_examenFisico %>
+  </div>
+
+  <div class="field">
+    <%= form.label :otroDiagnos %>
+    <%= form.text_area :otroDiagnos, id: :ficha_doc_otroDiagnos %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tratamiento %>
+    <%= form.text_area :tratamiento, id: :ficha_doc_tratamiento %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

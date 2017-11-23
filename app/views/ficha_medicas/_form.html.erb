@@ -1,0 +1,212 @@
+<%= form_with(model: ficha_medica, local: true) do |form| %>
+  <% if ficha_medica.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ficha_medica.errors.count, "error") %></h2>
+
+      <ul>
+      <% ficha_medica.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+
+<div class="container">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <center><h2>Ficha Clinica</h2></center>
+      <div class="row">
+        <div class="col-xs-2">
+          <%= form.label :numero, 'Numero de Ficha' %>
+          <%= form.number_field :numero, id: :ficha_medica_numero, class: 'form-control'%>
+        </div>
+
+        <div class="col-xs-3">
+          <label>Tipo de Ficha</label>
+          <%= form.collection_select(:categori_id, Categori.all, :id, :tipo, {include_blank: 'Tipo de Ficha' }, {:class=>'form-control'}) %>
+        </div>
+      </div>
+
+      <hr>
+        <center><h4>Datos del Establecimiento</h4></center>
+      <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <%= form.label :especialidad %>
+            <%= form.text_field :especialidad, id: :ficha_medica_especialidad, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <div class="col-md-6">
+              <label>Puesto de Salud</label>
+              <%= form.collection_select(:puesto_salud_id, PuestoSalud.all, :id, :nombre, {include_blank: 'Puesto de Salud' }, {:class=>'form-control', :id=>'select_puesto_salud'}) %>
+            </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="disabledTextInput">Localidad</label>
+                    <input type="text" id="disabledTextInput" class="form-control" disabled= "disabled" >
+                  </div>
+                </div>
+          </div>
+          <div class="form-group">
+                <div class="col-md-6">
+                    <label>Distrito</label>
+                    <input type="text" id="tbDistrito" class="form-control" disabled= "disabled">
+                </div>
+                <div class="col-md-6">
+                    <label>Region Sanitaria</label>
+                    <input type="text" id="tbRegion" class="form-control" disabled= "disabled">
+                </div>
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <hr>
+        <center><h4>Datos de Paciente</h4></center>
+        <hr>
+          <div class="col-lg-3">
+              <%= form.label :ci , 'Numero de Documento'%>
+              <%= form.text_field :ci, id: :ficha_medica_ci, class: "form-control" %>
+          </div>
+          <div class="col-lg-8">
+          </div>
+      </div>
+      <div class="row">
+                <div class="col-lg-6">
+                  <%= form.label :nombre,'Nombre(s)' %>
+                  <%= form.text_field :nombre, id: :ficha_medica_nombre, class: "form-control"  %>
+                  
+                </div>
+                <div class="col-lg-6">
+                  <%= form.label :apellido, 'Apellido(s)' %>
+                  <%= form.text_field :apellido, id: :ficha_medica_apellido, class: "form-control" %>
+                </div>
+                
+                <div class="col-md-6">
+                  <%= form.label :fechaNacimiento,'Fecha de Nacimiento' %>
+                  <%= form.date_field :fechaNacimiento, id: :ficha_medica_fehcaNacimiento, class: "form-control" %>
+                </div>
+
+                <div class="col-lg-4">
+                  <%= form.label :edad %>
+                  <%= form.number_field :edad, id: :ficha_medica_edad, class: "form-control" %>
+                </div>
+
+                <div class="col-md-6">
+                  <%= form.label :lugarNacimiento, "Lugar de Nacimiento" %>
+                  <%= form.text_field :lugarNacimiento, id: :ficha_medica_lugarNacimiento, class: "form-control" %>
+                </div>
+
+                <div class="col-xs-3">
+                  <label>Sexo</label>
+                  <%= form.collection_select(:sexo_id, Sexo.all, :id, :sexo, {include_blank: 'Seleccione Sexo' }, {:class=>'form-control'}) %>
+                </div>
+
+
+                <div class="col-md-6">
+                  <%= form.label :nacionalidad %>
+                  <%= form.text_field :nacionalidad, id: :ficha_medica_nacionalidad, class: "form-control" %>
+                </div>
+
+                <div class="col-xs-3">
+                  <label>Etnia</label>
+                  <%= form.collection_select(:origen_id, Origen.all, :id, :etnia, {include_blank: 'Tipo de Etnia'}, {:class=>'form-control'}) %>
+                </div>
+        
+                <div class="col-xs-3">
+                  <label>Estado Civil</label>
+                  <%= form.collection_select(:estado_civil_id, EstadoCivil.all, :id, :estadoCivil, {include_blank: 'Seleccione Estado Civil'}, {:class=>'form-control'}) %>
+                </div>
+
+                 <div class="col-md-6">
+                  <%= form.label :direccionActual, 'Dirección' %>
+                  <%= form.text_field :direccionActual, id: :ficha_medica_direccionActual, class: "form-control" %>
+                </div>
+
+                <div class="col-md-6">
+                  <%= form.label :departamentoActual, 'Departamento' %>
+                  <%= form.text_field :departamentoActual, id: :ficha_medica_departamentoActual, class: "form-control" %>
+                </div>
+
+                <div class="col-md-6">
+                  <%= form.label :distritoActual ,'Distrito'%>
+                  <%= form.text_field :distritoActual, id: :ficha_medica_distritoActual, class: "form-control" %>
+                </div>
+
+                <div class="col-xs-3">
+                  <label>Àrea</label>
+                  <%= form.collection_select(:area_id, Area.all, :id, :area, {include_blank: 'Seleccione un Área' }, {:class=>'form-control'}) %>
+                </div>
+
+                <div class="col-md-6">
+                  <%= form.label :telefono %>
+                  <%= form.number_field :telefono, id: :ficha_medica_telefono, class: "form-control" %>
+                </div>
+
+                <div class="col-md-3">
+                  <%= form.label :nCasa , 'Numero de Casa'%>
+                  <%= form.number_field :nCasa, id: :ficha_medica_nCasa, class: "form-control" %>
+                </div>
+
+                <div class="col-md-6">
+                  <%= form.label :email %>
+                  <%= form.text_field :email, id: :ficha_medica_email , class: "form-control"%>
+                </div>
+
+                <div class="col-xs-4">
+                  <label>Nivel Academico</label>
+                  <%= form.collection_select(:nivel_academico_id, NivelAcademico.all, :id, :nivelAcdemico, {include_blank: 'Seleccione Nivel Academico' }, {:class=>'form-control'}) %>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-8"></div>
+                  <div class="col-md-4">
+                    <div class="actions"><BR>
+                      <%= form.submit 'Guardar', class: "btn btn-success" %>
+                      <%= link_to 'Atras', ficha_medicas_path , class: "btn btn-info"%>
+
+                    </div>
+                  </div>
+                </div>
+        </div>
+      </div>
+    </div>
+  <div class="col-md-1"></div>
+</div>
+
+
+<% end %>
+<script type="text/javascript">
+  
+    $("#select_puesto_salud" ).change(function() {
+      var id = $('#select_puesto_salud').val();
+
+      $.ajax({
+              type:'GET', 
+              url: '/puesto_saluds/getInfo',
+              data: {"id": id},
+
+              success: function(data) {
+                console.log(data.nombre);
+                $('#disabledTextInput').val(data.localidad);
+                $('#tbDistrito').val(data.distrito);
+                $('#tbRegion').val(data.regionSanitaria);
+                  console.log(data);
+                  
+              },
+              error: function(data) {
+                    alert('error');
+              }
+
+               //data: $.param({ pagetime: {pagename: "whatever", start: 7, end: 21 }})
+          });
+
+      });
+</script>

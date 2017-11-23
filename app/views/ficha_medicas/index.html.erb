@@ -1,0 +1,90 @@
+
+<p id="notice"><%= notice %></p>
+  <h1>Fichas Medicas</h1>
+  <%= form_tag consul_ficha_medicas_path, method: :put do %>
+      <table id="ficha_table" class="table table-hover">
+        <thead>
+           <%= submit_tag "Consultar", class: "btn btn-success" %> <BR><br>
+          <tr>
+            <th></th>
+            <th>Nº de Ficha</th> 
+            <th>C.I.Nº</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Tipo de Ficha</th>
+            <th>Puesto</th>
+            <th>Consulta</th>
+            <th></th>
+             <th></th>
+              <th></th> 
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @ficha_medicas.each do |ficha_medica| %>
+            <tr>
+              <td><%= check_box_tag "ficha_medica_ids[]", ficha_medica.id %></td>
+              <td><%= ficha_medica.numero %></td>
+              <td><%= ficha_medica.ci %></td>
+              <td><%= ficha_medica.nombre %></td>
+              <td><%= ficha_medica.apellido %></td>
+              <td><%= ficha_medica.categori.tipo %></td>
+              <td><%= ficha_medica.puesto_salud.nombre %></td>
+               <td><%= ficha_medica.consulta ? "Si" : "No"%></td>
+              
+              <td><%= link_to '', ficha_medica , class: "btn btn-primary btn-sm fa fa-eye" %></td>
+              <td><%= link_to '', edit_ficha_medica_path(ficha_medica), class: "btn btn-default btn-sm fa fa-pencil" %></td>
+              <td><%= link_to "", ficha_medicas_consultas_path(@ficha_medica, format: 'pdf'), class: "btn btn-default btn-sm fa fa-print" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+   
+    <% end %>
+
+
+  <script type="text/javascript">
+    //
+
+    $(document).ready(function() {
+    $('#ficha_table').DataTable( {
+        responsive: true,
+        "bProcessing": true,
+        //"sPaginationType": "full_numbers",
+        "paging": true,
+        "iDisplayLength": 10,
+        "bPaginate": true,
+        "bSort": true,
+        "oLanguage": {
+            "oPaginate": {
+                "sPrevious": "←",
+                "sNext": "→",
+                "sLast": "»",
+                "sFirst": "«"
+            },
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando de _START_ al _END_ de _TOTAL_ registros",
+            //"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando del 0 al 0 de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar: ",
+            "sUrl": "",
+            "sInfoThousands": ".",
+            "sLoadingRecords": "Cargando...",
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    } );
+    } );
+
+    $("#check_box" ).change(function() {
+      alert.log(entroo);
+    } );
+    
+  </script>
