@@ -1,13 +1,18 @@
 <p id="notice"><%= notice %></p>
 
+
+<p>
+  <strong>Nombre del Paciente:</strong>
+  <%= @ficha_doc.diagnostico.ficha_medica.nombre %>
+
+  <strong>Apellido del Paciente:</strong>
+  <%= @ficha_doc.diagnostico.ficha_medica.apellido %>
+</p>
+
+
 <p>
   <strong>Motivoconsul:</strong>
   <%= @ficha_doc.motivoConsul %>
-</p>
-
-<p>
-  <strong>Diagnostico:</strong>
-  <%= @ficha_doc.diagnostico %>
 </p>
 
 <p>
@@ -24,16 +29,22 @@
   <strong>Tratamiento:</strong>
   <%= @ficha_doc.tratamiento %>
 </p>
-
-<p>
-  <strong>Reference:</strong>
-  <%= @ficha_doc.reference %>
-</p>
-
-<p>
-  <strong>Diagnostico:</strong>
-  <%= @ficha_doc.diagnostico %>
-</p>
+<div class="col-sm-6">
+        <strong>Fecha:</strong>
+         <%= @ficha_doc.diagnostico.fecha %>
+      </div>
+      <div class="col-sm-6">
+        <strong>Axila Rectal:</strong>
+         <%= @ficha_doc.diagnostico.axilaRectal %>
+      </div>
+      <div class="col-sm-6">
+        <strong>Presion Arterial:</strong>
+        <%= @ficha_doc.diagnostico.presionArterial %>
+      </div>
+      <div class="col-sm-6">
+        <strong>Frecuencia Cardiaca:</strong>
+        <%= @ficha_doc.diagnostico.freCardiaca %>
+      </div>
 
 <%= link_to 'Edit', edit_ficha_doc_path(@ficha_doc) %> |
 <%= link_to 'Back', ficha_docs_path %>
