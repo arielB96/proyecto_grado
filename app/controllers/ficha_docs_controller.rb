@@ -26,7 +26,7 @@ class FichaDocsController < ApplicationController
   def create
     @diagnostico = Diagnostico.find(params[:diagnostico_id])
     @ficha_doc = @diagnostico.ficha_docs.create(ficha_doc_params)
-    redirect_to diagnostico_path(@diagnostico)
+    redirect_to @ficha_docs
   end
 
   # PATCH/PUT /ficha_docs/1
