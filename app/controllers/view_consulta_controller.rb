@@ -6,10 +6,10 @@ class ViewConsultaController < ApplicationController
   def index
     @ficha_medicas = FichaMedica.where(consulta: true)
   end
-  def baja
-    FichaMedica.where(id: params[:ficha_medica_ids]).update_all(consulta: false)
-    redirect_to ficha_medicas_url
-  end
+  # def baja
+  #   FichaMedica.where(id: params[:ficha_medica_ids]).update_all(consulta: false)
+  #   redirect_to ficha_medicas_url
+  # end
 
   # # GET /view_consulta/1
   # # GET /view_consulta/1.json

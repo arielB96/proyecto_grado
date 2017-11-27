@@ -31,10 +31,12 @@
   <strong>Tratamiento:</strong>
   <%= @ficha_doc.tratamiento %>
 </p>
-
+<%if @ficha_doc.stock.present?%>
 <p>
   <strong>Medicamento:</strong>
+  <%= @ficha_doc.stock.medicamento.nombreMedi %>
 </p>
+<% end -%>
 
       
     

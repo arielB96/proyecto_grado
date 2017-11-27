@@ -25,7 +25,7 @@ class StocksController < ApplicationController
   # POST /stocks.json
   def create
     @ficha_doc = FichaDoc.find(params[:ficha_doc_id])
-    @stock = @ficha_doc.stocks.create(stocks_params)
+    @stock = @ficha_doc.stocks.create(stock_params)
   end
 
   # PATCH/PUT /stocks/1
@@ -60,6 +60,6 @@ class StocksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stock_params
-      params.require(:stock).permit(:cantidad, :medicamento_id)
+      params.require(:stock).permit(:cantidad, :medicamento_id,ficha_docs_attributes: [:id])
     end
 end

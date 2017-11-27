@@ -13,7 +13,6 @@ class FichaDocsController < ApplicationController
     @ficha_medica = FichaMedica.all 
     @diagnostico =  Diagnostico.all
     @medicamento = Medicamento.all
-
   end
 
   # GET /ficha_docs/new
@@ -31,7 +30,8 @@ class FichaDocsController < ApplicationController
   def create
     @diagnostico = Diagnostico.find(params[:diagnostico_id])
     @ficha_doc = @diagnostico.ficha_docs.create(ficha_doc_params)
-    redirect_to @ficha_doc
+    Diagnostico.where(id: params[:diagnostico_id]).update(consultar: false)
+    redirect_to diagnosticos_url
   end
 
   # PATCH/PUT /ficha_docs/1
@@ -66,6 +66,6 @@ class FichaDocsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ficha_doc_params
-      params.require(:ficha_doc).permit(:diagnostico_id,:motivoConsul, :examenFisico, :otroDiagnos, :tratamiento,stocks_attributes: [:id, :medicamento_id,:cantidad])
+      params.require(:ficha_doc).permit(:diagnostico_id,:motivoConsul, :examenFisico, :otroDiagnos, :tratamiento, stock_attributes: [:id, :medicamento_id,:cantidad])
     end
 end

@@ -1,19 +1,15 @@
 
 <p id="notice"><%= notice %></p>
   <h1>Fichas Medicas</h1>
-  <%= form_tag consul_ficha_medicas_path, method: :put do %>
       <table id="ficha_table" class="table table-hover">
-        <thead>
-           <%= submit_tag "Consultar", class: "btn btn-success" %> <BR><br>
+        <thead> 
           <tr>
-            <th></th>
             <th>Nº de Ficha</th> 
             <th>C.I.Nº</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Tipo de Ficha</th>
             <th>Puesto</th>
-            <th>Consulta</th>
             <th></th>
              <th></th>
               <th></th> 
@@ -23,14 +19,13 @@
         <tbody>
           <% @ficha_medicas.each do |ficha_medica| %>
             <tr>
-              <td><%= check_box_tag "ficha_medica_ids[]", ficha_medica.id %></td>
               <td><%= ficha_medica.numero %></td>
               <td><%= ficha_medica.ci %></td>
               <td><%= ficha_medica.nombre %></td>
               <td><%= ficha_medica.apellido %></td>
               <td><%= ficha_medica.categori.tipo %></td>
               <td><%= ficha_medica.puesto_salud.nombre %></td>
-               <td><%= ficha_medica.consulta ? "Si" : "No"%></td>
+               <!-- <td><%= ficha_medica.consulta ? "Si" : "No"%></td> -->
               
               <td><%= link_to '', ficha_medica , class: "btn btn-primary btn-sm fa fa-eye" %></td>
               <td><%= link_to '', edit_ficha_medica_path(ficha_medica), class: "btn btn-default btn-sm fa fa-pencil" %></td>
@@ -39,9 +34,6 @@
           <% end %>
         </tbody>
       </table>
-   
-    <% end %>
-
 
   <script type="text/javascript">
     //
