@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123001803) do
+ActiveRecord::Schema.define(version: 20171127115133) do
 
   create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "area"
@@ -58,14 +58,15 @@ ActiveRecord::Schema.define(version: 20171123001803) do
 
   create_table "ficha_docs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "motivoConsul"
-    t.string "diagnostico"
     t.text "examenFisico"
     t.text "otroDiagnos"
     t.text "tratamiento"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "diagnostico_id"
+    t.bigint "stock_id"
     t.index ["diagnostico_id"], name: "index_ficha_docs_on_diagnostico_id"
+    t.index ["stock_id"], name: "index_ficha_docs_on_stock_id"
   end
 
   create_table "ficha_medicas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -142,15 +143,12 @@ ActiveRecord::Schema.define(version: 20171123001803) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "stock_medicas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.date "fechaEntrega"
+  create_table "stocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "cantidad"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "ficha_medica_id"
     t.bigint "medicamento_id"
-    t.index ["ficha_medica_id"], name: "index_stock_medicas_on_ficha_medica_id"
-    t.index ["medicamento_id"], name: "index_stock_medicas_on_medicamento_id"
+    t.index ["medicamento_id"], name: "index_stocks_on_medicamento_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -168,11 +166,6 @@ ActiveRecord::Schema.define(version: 20171123001803) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "view_consulta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end
