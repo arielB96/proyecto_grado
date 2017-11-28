@@ -1,19 +1,9 @@
 <p id="notice"><%= notice %></p>
-
- <div class="row">
+<div class="row">
        <div class="col-sm-6">
         <strong>Fecha:</strong>
          <%= @diagnostico.fecha %>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <strong>Nombre y Apellido:</strong>
-        <%= @diagnostico.ficha_medica.nombre %> <%= @diagnostico.ficha_medica.apellido %>
-      </div>
-    </div>
-    
-    <div class="row">
       <div class="col-sm-6">
         <strong>Axila Rectal:</strong>
          <%= @diagnostico.axilaRectal %>
@@ -26,14 +16,21 @@
         <strong>Frecuencia Cardiaca:</strong>
         <%= @diagnostico.freCardiaca %>
       </div>
-    </div><BR><BR>
+      
+      <div class="col-sm-6">
+        <strong>Nombre:</strong>
+        <%= @diagnostico.ficha_medica.nombre %>
+        <strong>Apellido:</strong>
+        <%= @diagnostico.ficha_medica.apellido %>
+      </div>
+</div><BR><BR>
  
 <div class="row">
 
         <%= form_for([@diagnostico, @diagnostico.ficha_docs.build]) do |f| %>
           <div class="col-sm-6">
             <%= f.label :motivoConsul, 'Motivo de la Consulta' %>
-            <%= f.text_area :motivoConsul, id: :ficha_doc_motivoConsulc, class: "form-control" , :required => true%>
+            <%= f.text_area :motivoConsul, id: :ficha_doc_motivoConsulc, class: "form-control" %>
           </div>
 
           <div class="col-sm-6">
@@ -51,17 +48,16 @@
             <%= f.text_area :tratamiento, id: :ficha_doc_tratamiento, class: "form-control" %>
           </div>
 
-          <%= f.fields_for :stocks, @stock  do | p | %>
+          <%= f.fields_for :stocks, @stock do | p | %>
           
             <div class="col-sm-6">
               <label>Medicamento</label>
-              <%= p.collection_select(:medicamento_id, @medicamentos, :id, :nombreMedi, {include_blank: 'Nombre del Medicamento' }, {:class=>'form-control'}) %>
+              <%= p.collection_select(:medicamento_id, @medicamentos, :id, :nombreMedi, {include_blank: 'Nombre del Medicamento' }, {:class=>'form-control'})%>
             </div>
               <div class="col-sm-6">
                 <%= p.label :cantidad %>
                 <%= p.number_field :cantidad, id: :stock_medica_cantidad, class: "form-control" %><br><br>
               </div>
-              
           <% end -%>  
 
                 <%= f.submit 'Guardar' , class: "btn btn-success"%>

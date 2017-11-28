@@ -1,4 +1,4 @@
 class Stock < ApplicationRecord
 	belongs_to :medicamentos
-	has_many  :ficha_docs
+	belongs_to :ficha_doc
 end

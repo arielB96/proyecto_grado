@@ -20,6 +20,9 @@ Rails.application.routes.draw do
 
   resources :ficha_medicas do
     resources :diagnosticos 
+    collection do 
+      put :consul
+    end
   end
 
 
@@ -27,9 +30,6 @@ Rails.application.routes.draw do
 
   resources :diagnosticos do
     resources :ficha_docs
-    collection do 
-      put :consultado
-    end
   end
   resources :categoris
   resources :stocks

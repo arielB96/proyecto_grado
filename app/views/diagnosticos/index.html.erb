@@ -3,8 +3,10 @@
 <table id="diagnostico_tabla" class="table table-hover">
   <thead>
     <tr>
+      <th>Fecha</th>
       <th>Numero de Ficha</th>
-      <th>Nombre, Apellido</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
       <th></th>
       <th></th>
       <th></th>
@@ -15,11 +17,12 @@
   
     <% @diagnosticos.each do |consultas| %>
       <tr>
+        <td><%= consultas.fecha %></td>
         <td><%= consultas.ficha_medica.numero %></td>
-        <td><%= consultas.ficha_medica.nombre %> <%= consultas.ficha_medica.apellido %></td>
-      
+        <td><%= consultas.ficha_medica.nombre %></td>
+        <td><%= consultas.ficha_medica.apellido %></td>
 
-        <td><%= link_to 'Consultar', consultas %></td>
+        <td><%= link_to 'Show', consultas %></td>
         <td><%= link_to 'Edit', edit_diagnostico_path(consultas)%></td>
         <td><%= link_to 'Destroy', consultas, method: :delete, data: { confirm: 'Are you sure?' } %></td>
        </tr>

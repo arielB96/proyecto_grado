@@ -28,10 +28,10 @@ class FichaMedicasController < ApplicationController
       end
   end
 
-  # def consul
-  #   FichaMedica.where(id: params[:ficha_medica_ids]).update_all(consulta: true)
-  #   redirect_to ficha_medicas_url
-  # end
+  def consul
+    FichaMedica.where(id: params[:ficha_medica_ids]).update_all(consulta: true)
+    redirect_to ficha_medicas_url
+  end
   
   # GET /ficha_medicas/new
   def new
