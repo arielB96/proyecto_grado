@@ -1,4 +1,3 @@
 class Medicamento < ApplicationRecord
-	validates :nombreMedi, uniqueness: { message: "El nombre del Medicamento ya Existe" }, on: :create
-	has_many :stocks
+	validates :nombreMedi, uniqueness: { message: "El nombre del Medicamento ya Existe" }, on: :create	
 end

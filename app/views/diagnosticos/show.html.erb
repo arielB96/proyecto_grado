@@ -42,25 +42,14 @@
             <%= f.label :otroDiagnos, 'Otros Diagnosticos' %>
             <%= f.text_area :otroDiagnos, id: :ficha_doc_otroDiagnos, class: "form-control" %>
           </div>
-         
+
           <div class="col-sm-6">
             <%= f.label :tratamiento, 'Tratamiento' %>
-            <%= f.text_area :tratamiento, id: :ficha_doc_tratamiento, class: "form-control" %>
+            <%= f.text_area :tratamiento, id: :ficha_doc_tratamiento, class: "form-control" %><BR>
+
+            <%= f.submit 'Guardar' , class: "btn btn-success"%>
+            <%= link_to 'Atras', diagnosticos_path, class: "btn btn-info" %>
           </div>
-
-          <%= f.fields_for :stocks, @stock do | p | %>
-          
-            <div class="col-sm-6">
-              <label>Medicamento</label>
-              <%= p.collection_select(:medicamento_id, @medicamentos, :id, :nombreMedi, {include_blank: 'Nombre del Medicamento' }, {:class=>'form-control'})%>
-            </div>
-              <div class="col-sm-6">
-                <%= p.label :cantidad %>
-                <%= p.number_field :cantidad, id: :stock_medica_cantidad, class: "form-control" %><br><br>
-              </div>
-          <% end -%>  
-
-                <%= f.submit 'Guardar' , class: "btn btn-success"%>
-                <%= link_to 'Atras', diagnosticos_path, class: "btn btn-info" %>      
+         
 </div>
       <% end -%>

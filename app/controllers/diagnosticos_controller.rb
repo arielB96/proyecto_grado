@@ -11,13 +11,12 @@ class DiagnosticosController < ApplicationController
   # GET /diagnosticos/1
   # GET /diagnosticos/1.json
   def show
-    @ficha_docs = FichaMedica.all
-    @medicamentos = Medicamento.all
   end
 
   # GET /diagnosticos/new
   def new
     @diagnostico = Diagnostico.new
+    @medicamento = Medicamento.al
   end
 
   # GET /diagnosticos/1/edit
@@ -29,7 +28,7 @@ class DiagnosticosController < ApplicationController
   def create  
     @ficha_medica = FichaMedica.find(params[:ficha_medica_id])
     @diagnostico = @ficha_medica.diagnosticos.create(diagnostico_params)
-    redirect_to ficha_medicas_url
+    redirect_to @ficha_medica
   end
 
   # PATCH/PUT /diagnosticos/1

@@ -10,16 +10,11 @@ class FichaDocsController < ApplicationController
   # GET /ficha_docs/1
   # GET /ficha_docs/1.json
   def show
-    @ficha_medica = FichaMedica.all 
-    @diagnostico =  Diagnostico.all
-    @medicamento = Medicamento.all
-
   end
 
   # GET /ficha_docs/new
   def new
     @ficha_doc = FichaDoc.new
-    @stocks = @ficha_doc.stocks.build
   end
 
   # GET /ficha_docs/1/edit
@@ -66,6 +61,6 @@ class FichaDocsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ficha_doc_params
-      params.require(:ficha_doc).permit(:diagnostico_id,:motivoConsul, :examenFisico, :otroDiagnos, :tratamiento,stocks_attributes: [:id, :medicamento_id,:cantidad])
+      params.require(:ficha_doc).permit(:diagnostico_id,:motivoConsul, :examenFisico, :otroDiagnos, :tratamiento, :diagnostico)
     end
 end

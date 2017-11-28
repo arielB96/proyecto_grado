@@ -1,6 +1,8 @@
 class StockMedica < ApplicationRecord
-	has_many :ficha_docs
-	accepts_nested_attributes_for :ficha_docs
+	belongs_to :ficha_medica
+	def to_s
+      nombreMedi
+    end
 	belongs_to :medicamento
 	after_save :descontar_medicamentos
 	after_save :stock_negativo
