@@ -8,8 +8,6 @@
       <th>Nombre</th>
       <th>Apellido</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -22,10 +20,49 @@
         <td><%= consultas.ficha_medica.nombre %></td>
         <td><%= consultas.ficha_medica.apellido %></td>
 
-        <td><%= link_to 'Show', consultas %></td>
-        <td><%= link_to 'Edit', edit_diagnostico_path(consultas)%></td>
-        <td><%= link_to 'Destroy', consultas, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Consultar', consultas, class: "btn btn-success btn-xs"  %></td>
+       
        </tr>
     <% end %>
   </tbody>
 </table>
+<script type="text/javascript">
+    //
+
+    $(document).ready(function() {
+    $('#diagnostico_tabla').DataTable( {
+        responsive: true,
+        "bProcessing": true,
+        //"sPaginationType": "full_numbers",
+        "paging": true,
+        "iDisplayLength": 10,
+        "bPaginate": true,
+        "bSort": true,
+        "oLanguage": {
+            "oPaginate": {
+                "sPrevious": "←",
+                "sNext": "→",
+                "sLast": "»",
+                "sFirst": "«"
+            },
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando de _START_ al _END_ de _TOTAL_ registros",
+            //"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando del 0 al 0 de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar: ",
+            "sUrl": "",
+            "sInfoThousands": ".",
+            "sLoadingRecords": "Cargando...",
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    } );
+    } );
+  </script>
