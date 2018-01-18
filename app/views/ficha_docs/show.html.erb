@@ -46,5 +46,20 @@
         <%= @ficha_doc.diagnostico.freCardiaca %>
       </div>
 
+
+
+<%= form_for([@ficha_doc, @ficha_doc.stock_medicas.build]) do |f| %>
+  <div class="col-sm-6">
+    <%= f.label :nombreMedi, 'Nombre del Medicamento' %>
+        <%= f.collection_select(:medicamento_id, @medicamentos, :id, :nombreMedi, {include_blank: 'Nombre del Medicamento' }, {:class=>'form-control'}) %>
+  </div>
+  <div class="col-sm-6">
+    <%= f.label :cantidad %>
+    <%= f.number_field :cantidad, id: :stock_medica_cantidad, class: "form-control" %>
+  </div>
+  <%= f.submit "Guardar", class: "btn btn-success" %>
+<%end%>
+<br>
+
 <%= link_to 'Edit', edit_ficha_doc_path(@ficha_doc) %> |
 <%= link_to 'Back', ficha_docs_path %>

@@ -10,6 +10,7 @@ class FichaDocsController < ApplicationController
   # GET /ficha_docs/1
   # GET /ficha_docs/1.json
   def show
+    @medicamentos = Medicamento.all
   end
 
   # GET /ficha_docs/new
@@ -26,7 +27,7 @@ class FichaDocsController < ApplicationController
   def create
     @diagnostico = Diagnostico.find(params[:diagnostico_id])
     @ficha_doc = @diagnostico.ficha_docs.create(ficha_doc_params)
-    Diagnostico.where(params[:diagnostico_id]).update_all(consultar: false)
+    Diagnostico.where(id: params[:diagnostico_id]).update(consultar: false)
     redirect_to @ficha_doc
   end
 

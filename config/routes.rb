@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :ficha_docs 
+  resources :ficha_docs do
+    resources :stock_medicas
+  end
   resources :consulta
   resources :view_consulta do
     collection do
@@ -20,9 +22,6 @@ Rails.application.routes.draw do
 
   resources :ficha_medicas do
     resources :diagnosticos 
-    collection do 
-      put :consul
-    end
   end
 
 
@@ -32,8 +31,6 @@ Rails.application.routes.draw do
     resources :ficha_docs
   end
   resources :categoris
-  resources :stocks
-
   resources :puesto_saluds do 
     collection do get "getInfo"
     end

@@ -11,6 +11,7 @@ class DiagnosticosController < ApplicationController
   # GET /diagnosticos/1
   # GET /diagnosticos/1.json
   def show
+     
   end
 
   # GET /diagnosticos/new
@@ -28,7 +29,7 @@ class DiagnosticosController < ApplicationController
   def create  
     @ficha_medica = FichaMedica.find(params[:ficha_medica_id])
     @diagnostico = @ficha_medica.diagnosticos.create(diagnostico_params)
-    Diagnostico.where(params[:diagnostico_id]).update_all(consultar: true)
+    Diagnostico.where(id: params[:diagnostico_id]).update_all(consultar: true)
     redirect_to @ficha_medica
   end
 

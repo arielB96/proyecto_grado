@@ -1,5 +1,25 @@
 <p id="notice"><%= notice %></p>
-<div class="row">
+<div class="col-sm-4">
+ <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Nombre</th>
+      </tr>
+    </thead>
+    <tbody>
+        <%= @diagnostico.ficha_docs.each do |c|  %>
+        <tr>
+          <td><%= c.tratamiento %></td>
+          <td></td>
+        </tr>
+        <%end%>
+    </tbody>
+  </table>
+
+</div>
+<div class="col-sm-8">
+    <div class="row">
        <div class="col-sm-6">
         <strong>Fecha:</strong>
          <%= @diagnostico.fecha %>
@@ -20,7 +40,6 @@
       <div class="col-sm-6">
         <strong>Nombre:</strong>
         <%= @diagnostico.ficha_medica.nombre %>
-        <strong>Apellido:</strong>
         <%= @diagnostico.ficha_medica.apellido %>
       </div>
 </div><BR><BR>
@@ -50,6 +69,6 @@
             <%= f.submit 'Guardar' , class: "btn btn-success"%>
             <%= link_to 'Atras', diagnosticos_path, class: "btn btn-info" %>
           </div>
-         
+    </div>     
 </div>
       <% end -%>
