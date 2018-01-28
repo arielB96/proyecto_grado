@@ -5,7 +5,7 @@ class StockMedicasController < ApplicationController
   # GET /stock_medicas.json
   def index
     @stock_medicas = StockMedica.all
-    @medicamentos = Medicamento.all
+    @ficha_medicas = FichaMedica.all
   end
 
   # GET /stock_medicas/1

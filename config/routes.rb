@@ -2,12 +2,6 @@ Rails.application.routes.draw do
   resources :ficha_docs do
     resources :stock_medicas
   end
-  resources :consulta
-  resources :view_consulta do
-    collection do
-      put :baja
-    end
-  end
   root :to => 'ficha_medicas#index'
   resources :areas
   resources :origens

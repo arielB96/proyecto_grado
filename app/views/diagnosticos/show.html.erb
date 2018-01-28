@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
-<div class="col-sm-4">
- <table>
+<!-- <div class="col-sm-4">
+ <table id="historial">
     <thead>
       <tr>
         <th>Fecha</th>
@@ -8,45 +8,44 @@
       </tr>
     </thead>
     <tbody>
-        <%= @diagnostico.ficha_docs.each do |c|  %>
+        <% @diagnostico.ficha_docs.each do |c|  %>
         <tr>
+          <td><%= c.diagnostico.fecha %></td>
           <td><%= c.tratamiento %></td>
-          <td></td>
         </tr>
         <%end%>
     </tbody>
   </table>
 
-</div>
-<div class="col-sm-8">
+</div> -->
+<!-- <div class="col-sm-8"> -->
     <div class="row">
        <div class="col-sm-6">
         <strong>Fecha:</strong>
-         <%= @diagnostico.fecha %>
-      </div>
-      <div class="col-sm-6">
+        <%= @diagnostico.fecha %>
+       </div>
+       <div class="col-sm-6">
         <strong>Axila Rectal:</strong>
          <%= @diagnostico.axilaRectal %>
-      </div>
-      <div class="col-sm-6">
+       </div>
+       <div class="col-sm-6">
         <strong>Presion Arterial:</strong>
         <%= @diagnostico.presionArterial %>
-      </div>
-      <div class="col-sm-6">
+       </div>
+       <div class="col-sm-6">
         <strong>Frecuencia Cardiaca:</strong>
         <%= @diagnostico.freCardiaca %>
-      </div>
+       </div>
       
-      <div class="col-sm-6">
+       <div class="col-sm-6">
         <strong>Nombre:</strong>
         <%= @diagnostico.ficha_medica.nombre %>
         <%= @diagnostico.ficha_medica.apellido %>
-      </div>
-</div><BR><BR>
+       </div>
+    </div><BR><BR>
  
 <div class="row">
-
-        <%= form_for([@diagnostico, @diagnostico.ficha_docs.build]) do |f| %>
+<%= form_for([@diagnostico, @diagnostico.ficha_docs.build]) do |f| %>
           <div class="col-sm-6">
             <%= f.label :motivoConsul, 'Motivo de la Consulta' %>
             <%= f.text_area :motivoConsul, id: :ficha_doc_motivoConsulc, class: "form-control" %>
@@ -66,9 +65,49 @@
             <%= f.label :tratamiento, 'Tratamiento' %>
             <%= f.text_area :tratamiento, id: :ficha_doc_tratamiento, class: "form-control" %><BR>
 
-            <%= f.submit 'Guardar' , class: "btn btn-success"%>
+            <%= f.submit 'Recetar' , class: "btn btn-success"%>
             <%= link_to 'Atras', diagnosticos_path, class: "btn btn-info" %>
           </div>
     </div>     
 </div>
-      <% end -%>
+<% end -%>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#historial').DataTable( {
+        // "responsive": false,
+        // "bProcessing": false,
+        // "sPaginationType": "full_numbers",
+        // "paging": true,
+        "iDisplayLength": 5,
+        // "bPaginate": true,
+        "bSort": false,
+        "oLanguage": {
+            "oPaginate": {
+                "sPrevious": "←",
+                "sNext": "→",
+                "sLast": "»",
+                "sFirst": "«"
+            },
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando de _START_ al _END_ de _TOTAL_ registros",
+            //"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            // "sInfoEmpty": "Mostrando del 0 al 0 de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar: ",
+            "sUrl": "",
+            "sInfoThousands": ".",
+            "sLoadingRecords": "Cargando...",
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    } );
+    } );
+</script>

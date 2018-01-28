@@ -1,24 +1,39 @@
 <!DOCTYPE html>
 
 <p id="notice"><%= notice %></p>
+
 <p>
-  <strong>Fecha de Entrega:</strong>
-  <%= @stock_medica.fechaEntrega %>
+  <strong>Nombre del Paciente:</strong>
+  <%= @stock_medica.ficha_doc.diagnostico.ficha_medica.nombre %>
 </p>
 
 <p>
   <strong>Cantidad:</strong>
   <%= @stock_medica.cantidad%>
 </p>
+
 <p>
   <strong>Medicamento:</strong>
   <%= @stock_medica.medicamento.nombreMedi %>
 </p>
-<p>
-  <strong>Nombre Paciente:</strong>
-  <%= @stock_medica.ficha_medica.nombre %>
-</p>
+<div class="col-sm-4">
+ <table id="historial">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @stock_medica.medicamentos.each do |c|  %>
+        <tr>
+          <td><%= c.nombreMedi %></td>
+    
+        </tr>
+        <%end%>
+    </tbody>
+  </table>
 
+</div>
 
 <%= link_to 'Edit', edit_stock_medica_path(@stock_medica) %> |
 <%= link_to 'Back', stock_medicas_path %>

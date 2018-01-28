@@ -29,8 +29,13 @@ class DiagnosticosController < ApplicationController
   def create  
     @ficha_medica = FichaMedica.find(params[:ficha_medica_id])
     @diagnostico = @ficha_medica.diagnosticos.create(diagnostico_params)
-    Diagnostico.where(id: params[:diagnostico_id]).update_all(consultar: true)
-    redirect_to @ficha_medica
+    if @diagnostico.save
+    msg = "Se ha agregado correctamente "
+    flash[:notice] =  msg
+    else
+      redirect_to diagnosticos_url
+    end
+    redirect_to ficha_medicas_url
   end
 
   # PATCH/PUT /diagnosticos/1

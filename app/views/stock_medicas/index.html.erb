@@ -5,16 +5,20 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Medicamento</th>
-      <th>Cantidad</th>
-      <th colspan="3"></th>
+      <th>Nombre Paciente</th>
+      <th>Apellido</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @ficha_doc.stock_medicas.each do |stock_medica| %>
+    <% @stock_medicas.each do |stock_medica| %>
       <tr>
-        <td><%= stock_medica.medicamento.nombreMedi %></td>
+        <td><%= stock_medica.ficha_doc.diagnostico.ficha_medica.nombre %></td>
+        <td><%= stock_medica.ficha_doc.diagnostico.ficha_medica.apellido %></td>
+          
         <td><span class= "badge-success"><%= stock_medica.cantidad %></span></td>
         <td><%= link_to 'Ver', stock_medica %></td>
         <td><%= link_to 'Editar', edit_stock_medica_path(stock_medica) %></td>

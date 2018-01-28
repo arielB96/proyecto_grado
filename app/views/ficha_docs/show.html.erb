@@ -1,65 +1,54 @@
 <p id="notice"><%= notice %></p>
+<center><h2>Receta Medica</h2></center>
+<div class="row">
+  <div class="col-sm-6">
+    <strong>Fecha:</strong>
+    <%= @ficha_doc.diagnostico.fecha %>
+  </div>
 
+  <div class="col-sm-6">
+    <strong>Nombre del Paciente:</strong>
+    <%= @ficha_doc.diagnostico.ficha_medica.nombre %>
+    <%= @ficha_doc.diagnostico.ficha_medica.apellido %>
+  </div>
 
-<p>
-  <strong>Nombre del Paciente:</strong>
-  <%= @ficha_doc.diagnostico.ficha_medica.nombre %>
+</div><br>
 
-  <strong>Apellido del Paciente:</strong>
-  <%= @ficha_doc.diagnostico.ficha_medica.apellido %>
-</p>
-
-
-<p>
-  <strong>Motivoconsul:</strong>
-  <%= @ficha_doc.motivoConsul %>
-</p>
-
-<p>
-  <strong>Examenfisico:</strong>
-  <%= @ficha_doc.examenFisico %>
-</p>
-
-<p>
-  <strong>Otrodiagnos:</strong>
-  <%= @ficha_doc.otroDiagnos %>
-</p>
-
-<p>
-  <strong>Tratamiento:</strong>
-  <%= @ficha_doc.tratamiento %>
-</p>
-<div class="col-sm-6">
-        <strong>Fecha:</strong>
-         <%= @ficha_doc.diagnostico.fecha %>
-      </div>
-      <div class="col-sm-6">
-        <strong>Axila Rectal:</strong>
-         <%= @ficha_doc.diagnostico.axilaRectal %>
-      </div>
-      <div class="col-sm-6">
-        <strong>Presion Arterial:</strong>
-        <%= @ficha_doc.diagnostico.presionArterial %>
-      </div>
-      <div class="col-sm-6">
-        <strong>Frecuencia Cardiaca:</strong>
-        <%= @ficha_doc.diagnostico.freCardiaca %>
-      </div>
-
-
-
+<div class="row">
 <%= form_for([@ficha_doc, @ficha_doc.stock_medicas.build]) do |f| %>
-  <div class="col-sm-6">
-    <%= f.label :nombreMedi, 'Nombre del Medicamento' %>
-        <%= f.collection_select(:medicamento_id, @medicamentos, :id, :nombreMedi, {include_blank: 'Nombre del Medicamento' }, {:class=>'form-control'}) %>
-  </div>
-  <div class="col-sm-6">
-    <%= f.label :cantidad %>
-    <%= f.number_field :cantidad, id: :stock_medica_cantidad, class: "form-control" %>
-  </div>
-  <%= f.submit "Guardar", class: "btn btn-success" %>
+<div class="col-sm-6"><label>Medicamento</label></div><div class="col-sm-6"><label>Cantidad</label></div>
+      <div class="multi-field-wrapper">
+        <div class="multi-fields">
+          <div class="multi-field">
+            <br>
+            <div class="col-sm-6">
+              <%= f.collection_select(:medicamento_id, @medicamentos, :id, :nombreMedi, {include_blank: 'Nombre del Medicamento' }, {:class=>'form-control'}) %>
+            </div>
+            <div class="col-sm-4">
+             
+              <%= f.number_field :cantidad, id: :stock_medica_cantidad, class: "form-control" %>
+            </div>    
+            <button type="button" class="remove-field btn-danger  btn-sm" style='width:40px; height:33px'>x</button><br>
+          </div>
+        </div>
+        <button type="button" class="add-field btn-primary  btn-sm" style='width:40px; height:33px'>+</button>
+    </div>
+</div>
+<%= f.submit 'Guardar' , class: "btn btn-success"%>
 <%end%>
-<br>
+</div>
+</div>
 
-<%= link_to 'Edit', edit_ficha_doc_path(@ficha_doc) %> |
-<%= link_to 'Back', ficha_docs_path %>
+<script type="text/javascript">
+  $('.multi-field-wrapper').each(function() {
+    var $wrapper = $('.multi-fields', this);
+    $(".add-field", $(this)).click(function(e) {
+        $('.multi-field:first-child', $wrapper).clone(true).appendTo($wrapper).find('input').val('').focus();
+    });
+    $('.multi-field .remove-field', $wrapper).click(function() {
+        if ($('.multi-field', $wrapper).length > 1)
+            $(this).parent('.multi-field').remove();
+    });
+});
+</script>
+

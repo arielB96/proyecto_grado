@@ -63,6 +63,7 @@ class FichaDocsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ficha_doc_params
-      params.require(:ficha_doc).permit(:diagnostico_id,:motivoConsul, :examenFisico, :otroDiagnos, :tratamiento, :diagnostico)
+      params.require(:ficha_doc).permit(:diagnostico_id,:motivoConsul, :examenFisico, :otroDiagnos, :tratamiento, :diagnostico,
+        stock_medicas_attributes: [:id, :nombreMedi, :cantidad, :_destroy])
     end
 end

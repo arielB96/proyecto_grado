@@ -1,2 +1,3 @@
 module FichaDocsHelper
+	
 end
