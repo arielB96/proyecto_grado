@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180117154324) do
+ActiveRecord::Schema.define(version: 20180128184441) do
 
   create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "area"
@@ -149,6 +149,8 @@ ActiveRecord::Schema.define(version: 20180117154324) do
     t.datetime "updated_at", null: false
     t.bigint "ficha_doc_id", null: false
     t.bigint "medicamento_id", null: false
+    t.bigint "diagnostico_id"
+    t.index ["diagnostico_id"], name: "index_stock_medicas_on_diagnostico_id"
     t.index ["ficha_doc_id"], name: "index_stock_medicas_on_ficha_doc_id"
     t.index ["medicamento_id"], name: "index_stock_medicas_on_medicamento_id"
   end
@@ -170,4 +172,5 @@ ActiveRecord::Schema.define(version: 20180117154324) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "stock_medicas", "diagnosticos"
 end

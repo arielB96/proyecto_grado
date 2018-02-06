@@ -24,12 +24,12 @@ class FichaDocsController < ApplicationController
 
   # POST /ficha_docs
   # POST /ficha_docs.json
-  def create
+  
+  def creat
     @diagnostico = Diagnostico.find(params[:diagnostico_id])
     @ficha_doc = @diagnostico.ficha_docs.create(ficha_doc_params)
-    Diagnostico.where(id: params[:diagnostico_id]).update(consultar: false)
-    redirect_to @ficha_doc
   end
+
 
   # PATCH/PUT /ficha_docs/1
   # PATCH/PUT /ficha_docs/1.json
@@ -64,6 +64,6 @@ class FichaDocsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ficha_doc_params
       params.require(:ficha_doc).permit(:diagnostico_id,:motivoConsul, :examenFisico, :otroDiagnos, :tratamiento, :diagnostico,
-        stock_medicas_attributes: [:id, :nombreMedi, :cantidad, :_destroy])
+        stock_medicas_attributes: [:id, :medicamento_id, :cantidad, :_destroy])
     end
 end

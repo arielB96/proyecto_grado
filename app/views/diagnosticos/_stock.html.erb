@@ -1,0 +1,15 @@
+<fieldset class="scheduler-border-doc">
+  <div class="field">
+    <%= f.label :cantidad %>
+    <%= f.text_field :cantidad, id: :stock_medica_cantidad %>
+  </div>
+
+  
+
+    <div class="row">
+    <div class="col-md-12">
+      <%= f.hidden_field :_destroy %>
+      <%= link_to  'Eliminar Documento <i class="fa fa-times fa-1x" aria-hidden="true"></i>'.html_safe, '#', class: "remove_fields btn btn-danger" %>
+    </div>
+  </div>
+</fieldset>

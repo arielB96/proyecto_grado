@@ -1,24 +1,5 @@
 <p id="notice"><%= notice %></p>
-<!-- <div class="col-sm-4">
- <table id="historial">
-    <thead>
-      <tr>
-        <th>Fecha</th>
-        <th>Nombre</th>
-      </tr>
-    </thead>
-    <tbody>
-        <% @diagnostico.ficha_docs.each do |c|  %>
-        <tr>
-          <td><%= c.diagnostico.fecha %></td>
-          <td><%= c.tratamiento %></td>
-        </tr>
-        <%end%>
-    </tbody>
-  </table>
 
-</div> -->
-<!-- <div class="col-sm-8"> -->
     <div class="row">
        <div class="col-sm-6">
         <strong>Fecha:</strong>
@@ -43,71 +24,49 @@
         <%= @diagnostico.ficha_medica.apellido %>
        </div>
     </div><BR><BR>
- 
-<div class="row">
-<%= form_for([@diagnostico, @diagnostico.ficha_docs.build]) do |f| %>
-          <div class="col-sm-6">
-            <%= f.label :motivoConsul, 'Motivo de la Consulta' %>
-            <%= f.text_area :motivoConsul, id: :ficha_doc_motivoConsulc, class: "form-control" %>
-          </div>
+  <%= nested_form_for @diagnostico do |f| %>
+          <%= f.fields_for FichaDoc.new  do |ficha| %>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <%= ficha.label :motivoConsul, 'Motivo de la Consulta' %>
+                      <%= ficha.text_area :motivoConsul, id: :ficha_doc_motivoConsulc, class: "form-control" %>
+                    </div>
 
-          <div class="col-sm-6">
-            <%= f.label :examenFisico, 'Examen Fisico' %>
-            <%= f.text_area :examenFisico, id: :ficha_doc_examenFisico, class: "form-control" %>
-          </div>
+                    <div class="col-sm-6">
+                      <%= ficha.label :examenFisico, 'Examen Fisico' %>
+                      <%= ficha.text_area :examenFisico, id: :ficha_doc_examenFisico, class: "form-control" %>
+                    </div>
 
-          <div class="col-sm-6">
-            <%= f.label :otroDiagnos, 'Otros Diagnosticos' %>
-            <%= f.text_area :otroDiagnos, id: :ficha_doc_otroDiagnos, class: "form-control" %>
-          </div>
+                    <div class="col-sm-6">
+                      <%= ficha.label :otroDiagnos, 'Otros Diagnosticos' %>
+                      <%= ficha.text_area :otroDiagnos, id: :ficha_doc_otroDiagnos, class: "form-control" %>
+                    </div>
 
-          <div class="col-sm-6">
-            <%= f.label :tratamiento, 'Tratamiento' %>
-            <%= f.text_area :tratamiento, id: :ficha_doc_tratamiento, class: "form-control" %><BR>
+                    <div class="col-sm-6">
+                      <%= ficha.label :tratamiento, 'Tratamiento' %>
+                      <%= ficha.text_area :tratamiento, id: :ficha_doc_tratamiento, class: "form-control" %><BR>
+                    </div>
+                  </div>
+                 <h3>Receta</h3>
 
-            <%= f.submit 'Recetar' , class: "btn btn-success"%>
-            <%= link_to 'Atras', diagnosticos_path, class: "btn btn-info" %>
-          </div>
-    </div>     
-</div>
-<% end -%>
+                 <h4><%= f.link_to_add "",:stock_medicas, class: "glyphicon glyphicon-plus btn-warning",:data => { :target => "#stock_medica" } %></h4>
+               </BR>
+                  <table id="stock_medica" class="table">
+                          <%= f.fields_for :stock_medicas, :wrapper => false do |stock| %>
 
+                            <tr class="fields">
+                              <td><%= stock.collection_select(:medicamento_id, @medicamentos, :id, :nombreMedi, {include_blank: 'Nombre del Medicamento' }, {:class=>'form-control'}) %></td>
+                              <td><%= stock.text_field :cantidad, class: "form-control" %></td>
+                              <td><%= stock.link_to_remove "", class: "glyphicon glyphicon-minus-sign btn-danger" %></td>
+                            </tr>
+                          <% end %>
+                  </table>
+                  
+                 
+           <%= f.submit 'Recetar' , class: "btn btn-success"%>
+           <%= link_to 'Atras', diagnosticos_path, class: "btn btn-info" %>        
+          <% end -%>
+                 
+  <% end -%>
 
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('#historial').DataTable( {
-        // "responsive": false,
-        // "bProcessing": false,
-        // "sPaginationType": "full_numbers",
-        // "paging": true,
-        "iDisplayLength": 5,
-        // "bPaginate": true,
-        "bSort": false,
-        "oLanguage": {
-            "oPaginate": {
-                "sPrevious": "←",
-                "sNext": "→",
-                "sLast": "»",
-                "sFirst": "«"
-            },
-            "sProcessing": "Procesando...",
-            "sLengthMenu": "Mostrar _MENU_ registros",
-            "sZeroRecords": "No se encontraron resultados",
-            "sEmptyTable": "Ningún dato disponible en esta tabla",
-            "sInfo": "Mostrando de _START_ al _END_ de _TOTAL_ registros",
-            //"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            // "sInfoEmpty": "Mostrando del 0 al 0 de 0 registros",
-            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix": "",
-            "sSearch": "Buscar: ",
-            "sUrl": "",
-            "sInfoThousands": ".",
-            "sLoadingRecords": "Cargando...",
-            "oAria": {
-                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        }
-    } );
-    } );
-</script>
+        

@@ -16,4 +16,6 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require popper
+//= require jquery_nested_form
 //= require_tree .
+

@@ -29,10 +29,17 @@ class StockMedicasController < ApplicationController
   # POST /stock_medicas
   # POST /stock_medicas.json
   def create
-    @ficha_doc = FichaDoc.find(params[:ficha_doc_id])
-    @stock_medica = @ficha_doc.stock_medicas.create(stock_medica_params)
-    Diagnostico.where(id: params[:diagnostico_id]).update_all(consultar: true)
-    redirect_to diagnosticos_url
+    @stock_medica = StockMedica.new(stock_medica_params)
+
+    respond_to do |format|
+      if @stock_medica.save
+        format.html { redirect_to @stock_medica, notice: 'Fue Crado stock' }
+        format.json { render :show, status: :created, location: @stock_medica }
+      else
+        format.html { render :new }
+        format.json { render json: @stock_medica.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /stock_medicas/1

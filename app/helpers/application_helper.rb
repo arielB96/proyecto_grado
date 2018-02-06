@@ -13,6 +13,7 @@ module ApplicationHelper
     end
     nil
   end
+  
   module Medicamnetos
   def nav_link(page, &link_text) 
     class_name = request.env['PATH_INFO'].match(page) ? 'active' : nil

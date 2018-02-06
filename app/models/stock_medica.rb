@@ -1,5 +1,6 @@
 class StockMedica < ApplicationRecord
 	belongs_to :ficha_doc
+	belongs_to :diagnostico
 	belongs_to :medicamento
 	 after_save :descontar_medicamentos
 	 # after_save :stock_negativo

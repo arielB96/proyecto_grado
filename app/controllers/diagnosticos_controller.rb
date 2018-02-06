@@ -11,13 +11,14 @@ class DiagnosticosController < ApplicationController
   # GET /diagnosticos/1
   # GET /diagnosticos/1.json
   def show
-     
+     @ficha_doc = FichaDoc.new
+     @stock_medicas = StockMedica.new
+     @medicamentos = Medicamento.all
   end
 
   # GET /diagnosticos/new
   def new
     @diagnostico = Diagnostico.new
-    @medicamento = Medicamento.all
   end
 
   # GET /diagnosticos/1/edit
@@ -70,6 +71,8 @@ class DiagnosticosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def diagnostico_params
-      params.require(:diagnostico).permit(:ficha_medica_id,:fecha, :axilaRectal, :presionArterial, :pulso, :freCardiaca, :freRespi, :peso, :talla, :perimeCefalico, :masaCorpo, :circuAbdomi, :estadNutricional, :alimentacion, :desarrolloMadura, :tanner, :vacucacionVigente, :areaTecEspecialidades, :nuevo,:consultar)
+      params.require(:diagnostico).permit(:ficha_medica_id,:fecha, :axilaRectal, :presionArterial, :pulso, :freCardiaca, :freRespi, :peso, :talla, :perimeCefalico, :masaCorpo, :circuAbdomi, :estadNutricional, :alimentacion, :desarrolloMadura, :tanner, :vacucacionVigente, :areaTecEspecialidades, :nuevo,:consultar,
+        fiha_docs_attributes: [:diagnostico_id,:motivoConsul, :examenFisico, :otroDiagnos, :tratamiento],
+        stock_medicas_attributes: [:id, :medicamento_id, :cantidad, :_destroy])
     end
 end
