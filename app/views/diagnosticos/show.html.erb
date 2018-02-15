@@ -24,8 +24,7 @@
         <%= @diagnostico.ficha_medica.apellido %>
        </div>
     </div><BR><BR>
-  <%= nested_form_for @diagnostico do |f| %>
-          <%= f.fields_for FichaDoc.new  do |ficha| %>
+<%= nested_form_for([@diagnostico, @diagnostico.ficha_docs.build]) do |ficha|%>
                   <div class="row">
                     <div class="col-sm-6">
                       <%= ficha.label :motivoConsul, 'Motivo de la Consulta' %>
@@ -49,10 +48,17 @@
                   </div>
                  <h3>Receta</h3>
 
-                 <h4><%= f.link_to_add "",:stock_medicas, class: "glyphicon glyphicon-plus btn-warning",:data => { :target => "#stock_medica" } %></h4>
+                 <p class="btn-group-sm"><%= ficha.link_to_add "Agregar",:stock_medicas, class: "glyphicon glyphicon-plus btn-sm-success",:data => { :target => "#stock_medica" } %></p>
                </BR>
                   <table id="stock_medica" class="table">
-                          <%= f.fields_for :stock_medicas, :wrapper => false do |stock| %>
+                    <thead>
+                      <tr>
+                        <th>Medicamentos</th>
+                        <th>Cantidad</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                          <%= ficha.fields_for :stock_medicas , :wrapper => false do |stock| %>
 
                             <tr class="fields">
                               <td><%= stock.collection_select(:medicamento_id, @medicamentos, :id, :nombreMedi, {include_blank: 'Nombre del Medicamento' }, {:class=>'form-control'}) %></td>
@@ -60,13 +66,12 @@
                               <td><%= stock.link_to_remove "", class: "glyphicon glyphicon-minus-sign btn-danger" %></td>
                             </tr>
                           <% end %>
-                  </table>
-                  
-                 
-           <%= f.submit 'Recetar' , class: "btn btn-success"%>
+                  </table>         
+           <%= ficha.submit 'Guardar' , class: "btn btn-success"%>
            <%= link_to 'Atras', diagnosticos_path, class: "btn btn-info" %>        
           <% end -%>
+  
                  
-  <% end -%>
+  
 
         

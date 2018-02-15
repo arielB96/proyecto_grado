@@ -24,10 +24,10 @@
               </tr>
             </thead>
             <tbody>
-              <% @stock_medicas.each do |p| %>
+              <% @ficha_doc.stock_medicas.each do |p| %>
                <tr class="fields">
                 <td><%= p.medicamento.nombreMedi %></td>
-                <td><%= p.stock_medica.cantidad%></td>
+                <td><%= p.cantidad %></td>
                </tr>
               <% end %>
             </tbody>

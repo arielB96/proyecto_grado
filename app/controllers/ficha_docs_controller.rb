@@ -10,7 +10,10 @@ class FichaDocsController < ApplicationController
   # GET /ficha_docs/1
   # GET /ficha_docs/1.json
   def show
+    @stock_medicas = StockMedica.all
     @medicamentos = Medicamento.all
+
+    @diagnostico = Diagnostico.all
   end
 
   # GET /ficha_docs/new
@@ -25,10 +28,44 @@ class FichaDocsController < ApplicationController
   # POST /ficha_docs
   # POST /ficha_docs.json
   
-  def creat
-    @diagnostico = Diagnostico.find(params[:diagnostico_id])
-    @ficha_doc = @diagnostico.ficha_docs.create(ficha_doc_params)
+  # def create
+  #   # @diagnostico = Diagnostico.find(params[:diagnostico_id])
+  #    @diagnostico = FichaDoc.new(ficha_doc_params)
+  #   # redirect_to diagnostico_path(@diagnostico)
+
+  #   if @diagnostico.save
+  #       msg = "Creado "
+  #       flash[:notice] =  msg
+  #       redirect_to diagnosticos_url
+  #     else
+  #       msg = "Error "
+  #       flash[:alert] =  msg
+  #       redirect_to ficha_docs_path(@ficha_doc)
+  #     end
+  # end
+
+
+  def create
+     @diagnostico = Diagnostico.find(params[:diagnostico_id])
+     @ficha_doc =  @diagnostico.ficha_docs.create(params.require(:ficha_doc).permit(:diagnostico_id,:motivoConsul, :examenFisico, :otroDiagnos, :tratamiento,
+      stock_medicas_attributes: [:cantidad, :medicamento_id, :_destroy]))
+    # @diagnostico = Diagnostico.find(params[:diagnostico_id])
+    # @ficha_doc = FichaDoc.new(ficha_doc_params)
+
+    respond_to do |format|
+      if @ficha_doc.save
+        format.html { redirect_to @ficha_doc, notice: 'Creado' }
+        format.json { render :show, status: :created, location: @ficha_dos }
+      else
+        format.html { render :show }
+        format.json { render json: @ficha_doc.errors, status: :unprocessable_entity }
+      end
+    end
   end
+
+
+  # @ficha_medica = FichaMedica.find(params[:ficha_medica_id])
+  # @diagnostico = @ficha_medica.diagnosticos.create(diagnostico_params)
 
 
   # PATCH/PUT /ficha_docs/1
@@ -63,7 +100,7 @@ class FichaDocsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ficha_doc_params
-      params.require(:ficha_doc).permit(:diagnostico_id,:motivoConsul, :examenFisico, :otroDiagnos, :tratamiento, :diagnostico,
-        stock_medicas_attributes: [:id, :medicamento_id, :cantidad, :_destroy])
+      params.require(:ficha_doc).permit(:diagnostico_id,:motivoConsul, :examenFisico, :otroDiagnos, :tratamiento)
+        # stock_medicas_attributes: [:id, :medicamento_id, :cantidad, :_destroy])
     end
 end

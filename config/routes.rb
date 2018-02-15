@@ -10,17 +10,12 @@ Rails.application.routes.draw do
   resources :estado_civils
   resources :nivel_academicos
   resources :sexos
- 
   resources :stock_medicas
   resources :medicamentos
-
   resources :ficha_medicas do
     resources :diagnosticos 
   end
-
-
   # get 'ficha_medicas/consultas' => 'ficha_medicas#consultas', :as => :consultas
-
   resources :diagnosticos do
     resources :ficha_docs
   end

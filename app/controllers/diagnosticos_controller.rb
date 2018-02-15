@@ -11,9 +11,9 @@ class DiagnosticosController < ApplicationController
   # GET /diagnosticos/1
   # GET /diagnosticos/1.json
   def show
-     @ficha_doc = FichaDoc.new
-     @stock_medicas = StockMedica.new
-     @medicamentos = Medicamento.all
+    @medicamentos = Medicamento.all
+    @ficha_doc = FichaDoc.new
+    @stock_medica = StockMedica.new
   end
 
   # GET /diagnosticos/new
@@ -23,6 +23,8 @@ class DiagnosticosController < ApplicationController
 
   # GET /diagnosticos/1/edit
   def edit
+    @ficha_doc = FichaDoc.new
+    @stock_medica = StockMedica.new
   end
 
   # POST /diagnosticos
@@ -30,21 +32,35 @@ class DiagnosticosController < ApplicationController
   def create  
     @ficha_medica = FichaMedica.find(params[:ficha_medica_id])
     @diagnostico = @ficha_medica.diagnosticos.create(diagnostico_params)
-    if @diagnostico.save
-    msg = "Se ha agregado correctamente "
-    flash[:notice] =  msg
-    else
-      redirect_to diagnosticos_url
-    end
+      if @diagnostico.save
+      msg = "Se ha agregado correctamente "
+      flash[:notice] =  msg
+      else
+        redirect_to @ficha_medica
+      end
     redirect_to ficha_medicas_url
   end
 
   # PATCH/PUT /diagnosticos/1
   # PATCH/PUT /diagnosticos/1.json
+  # def update 
+  # @diagnostico = @diagnostico.ficha_docs.build(diagnostico_params)
+  #   if @diagnostico.save 
+  #       msg = "Se ha agregado correctamente "
+  #       flash[:notice] =  msg
+  #       # @diagnostico.update_attributes({:consultar => false });
+  #       redirect_to diagnosticos_url
+  #     else
+  #       msg = "Ocurrio un error"
+  #       flash[:alert] =  msg
+  #       redirect_to @diagnostico
+  #     end
+  # end
+
   def update
     respond_to do |format|
       if @diagnostico.update(diagnostico_params)
-        format.html { redirect_to @diagnostico, notice: 'Diagnostico was successfully updated.' }
+        format.html { redirect_to @diagnostico, notice: 'Diagnostico Actualizado' }
         format.json { render :show, status: :ok, location: @diagnostico }
       else
         format.html { render :edit }
@@ -71,8 +87,6 @@ class DiagnosticosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def diagnostico_params
-      params.require(:diagnostico).permit(:ficha_medica_id,:fecha, :axilaRectal, :presionArterial, :pulso, :freCardiaca, :freRespi, :peso, :talla, :perimeCefalico, :masaCorpo, :circuAbdomi, :estadNutricional, :alimentacion, :desarrolloMadura, :tanner, :vacucacionVigente, :areaTecEspecialidades, :nuevo,:consultar,
-        fiha_docs_attributes: [:diagnostico_id,:motivoConsul, :examenFisico, :otroDiagnos, :tratamiento],
-        stock_medicas_attributes: [:id, :medicamento_id, :cantidad, :_destroy])
+      params.require(:diagnostico).permit(:ficha_medica_id,:fecha, :axilaRectal, :presionArterial, :pulso, :freCardiaca, :freRespi, :peso, :talla, :perimeCefalico, :masaCorpo, :circuAbdomi, :estadNutricional, :alimentacion, :desarrolloMadura, :tanner, :vacucacionVigente, :areaTecEspecialidades, :nuevo,:consultar)
     end
 end

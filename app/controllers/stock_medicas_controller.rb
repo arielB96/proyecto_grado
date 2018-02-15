@@ -29,8 +29,10 @@ class StockMedicasController < ApplicationController
   # POST /stock_medicas
   # POST /stock_medicas.json
   def create
-    @stock_medica = StockMedica.new(stock_medica_params)
 
+    @diagnostico = Diagnostico.find(params[:diagnostico_id])
+    @stock_medica =  @diagnostico.stock_medicas.create(stock_medica_params)
+   
     respond_to do |format|
       if @stock_medica.save
         format.html { redirect_to @stock_medica, notice: 'Fue Crado stock' }
@@ -74,6 +76,6 @@ class StockMedicasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stock_medica_params
-      params.require(:stock_medica).permit(:cantidad,:fechaEntrega, :ficha_medica_id, :medicamento_id)
+      params.require(:stock_medica).permit(:cantidad, :medicamento_id)
     end
 end
