@@ -1,21 +1,27 @@
 class DiagnosticosController < ApplicationController
-  before_action :set_diagnostico, only: [:show, :edit, :update, :destroy]
+  before_action :set_diagnostico, only: [:show, :edit, :update, :destroy, :guardar]
 
   # GET /diagnosticos
   # GET /diagnosticos.json
   def index
     @diagnosticos = Diagnostico.where(consultar: true)
   end
+  def consultas
+    @diagnosticos = Diagnostico.where(consultar: false)
+  end
 
+  def guardar
+    @diagnostico = Diagnostico.find(params[:dignostico_id])
+    @ficha_doc = @diagnostico.ficha_docs.create(diagnostico_params)
+  end
 
   # GET /diagnosticos/1
   # GET /diagnosticos/1.json
   def show
     @medicamentos = Medicamento.all
-    @ficha_doc = FichaDoc.new
-    @stock_medica = StockMedica.new
+    @stock_medica = @diagnostico.stock_medicas.build
+    @ficha_doc = @diagnostico.ficha_docs.build
   end
-
   # GET /diagnosticos/new
   def new
     @diagnostico = Diagnostico.new
@@ -23,8 +29,6 @@ class DiagnosticosController < ApplicationController
 
   # GET /diagnosticos/1/edit
   def edit
-    @ficha_doc = FichaDoc.new
-    @stock_medica = StockMedica.new
   end
 
   # POST /diagnosticos
@@ -58,13 +62,14 @@ class DiagnosticosController < ApplicationController
   # end
 
   def update
-    respond_to do |format|
+  respond_to do |format|
       if @diagnostico.update(diagnostico_params)
-        format.html { redirect_to @diagnostico, notice: 'Diagnostico Actualizado' }
-        format.json { render :show, status: :ok, location: @diagnostico }
+        @diagnostico.update_attributes({:consultar => false })
+        format.html { redirect_to diagnosticos_url, notice: 'Diagnostico Actualizado' }
       else
-        format.html { render :edit }
-        format.json { render json: @diagnostico.errors, status: :unprocessable_entity }
+        format.html { render :show }
+        msg = "Ocurrio un error"
+        flash[:alert] =  msg
       end
     end
   end
@@ -87,6 +92,7 @@ class DiagnosticosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def diagnostico_params
-      params.require(:diagnostico).permit(:ficha_medica_id,:fecha, :axilaRectal, :presionArterial, :pulso, :freCardiaca, :freRespi, :peso, :talla, :perimeCefalico, :masaCorpo, :circuAbdomi, :estadNutricional, :alimentacion, :desarrolloMadura, :tanner, :vacucacionVigente, :areaTecEspecialidades, :nuevo,:consultar)
+      params.require(:diagnostico).permit(:ficha_medica_id,:fecha, :axilaRectal, :presionArterial, :pulso, :freCardiaca, :freRespi, :peso, :talla, :perimeCefalico, :masaCorpo, :circuAbdomi, :estadNutricional, :alimentacion, :desarrolloMadura, :tanner, :vacucacionVigente, :areaTecEspecialidades, :nuevo,:consultar,
+        ficha_docs_attributes:[:motivoConsul, :examenFisico, :otroDiagnos, :tratamiento],stock_medicas_attributes:[:medicamento_id, :cantidad, :_destroy])
     end
 end

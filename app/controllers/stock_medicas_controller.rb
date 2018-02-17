@@ -29,9 +29,7 @@ class StockMedicasController < ApplicationController
   # POST /stock_medicas
   # POST /stock_medicas.json
   def create
-
-    @diagnostico = Diagnostico.find(params[:diagnostico_id])
-    @stock_medica =  @diagnostico.stock_medicas.create(stock_medica_params)
+   @stock_medica =  StockMedica.new(stock_medica_params)
    
     respond_to do |format|
       if @stock_medica.save

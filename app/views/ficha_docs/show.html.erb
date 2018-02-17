@@ -14,23 +14,4 @@
 
 </div><br>
 
-<div class="row">
-       <table id="" class="table">
-            <thead>
-             <tr>
-                <th>Nombre del medicamento</th>
-                <th>Cantidad</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @ficha_doc.stock_medicas.each do |p| %>
-               <tr class="fields">
-                <td><%= p.medicamento.nombreMedi %></td>
-                <td><%= p.cantidad %></td>
-               </tr>
-              <% end %>
-            </tbody>
-        </table>
-</div>
 

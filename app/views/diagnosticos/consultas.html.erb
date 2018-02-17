@@ -1,0 +1,25 @@
+<table id="diagnostico_tabla" class="table table-hover">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Numero de Ficha</th>
+      <th>Tipo de Ficha</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  
+    <% @diagnosticos.each do |consultas| %>
+      <tr>
+        <td><%= consultas.fecha %></td>
+        <td><%= consultas.ficha_medica.numero %></td>
+        <td><%= consultas.ficha_medica.categori.tipo %></td>
+        <td><%= consultas.ficha_medica.nombre %></td>
+        <td><%= consultas.ficha_medica.apellido %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>

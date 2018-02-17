@@ -24,7 +24,8 @@
         <%= @diagnostico.ficha_medica.apellido %>
        </div>
     </div><BR><BR>
-<%= nested_form_for([@diagnostico, @diagnostico.ficha_docs.build]) do |ficha|%>
+<%= nested_form_for @diagnostico do |d|%>
+  <%= d.fields_for :ficha_docs do |ficha|%>
                   <div class="row">
                     <div class="col-sm-6">
                       <%= ficha.label :motivoConsul, 'Motivo de la Consulta' %>
@@ -46,9 +47,7 @@
                       <%= ficha.text_area :tratamiento, id: :ficha_doc_tratamiento, class: "form-control" %><BR>
                     </div>
                   </div>
-                 <h3>Receta</h3>
-
-                 <p class="btn-group-sm"><%= ficha.link_to_add "Agregar",:stock_medicas, class: "glyphicon glyphicon-plus btn-sm-success",:data => { :target => "#stock_medica" } %></p>
+  <p class="btn-group-sm"><%= d.link_to_add "Agregar",:stock_medicas, class: "glyphicon glyphicon-plus btn-sm-success",:data => { :target => "#stock_medica" } %></p>
                </BR>
                   <table id="stock_medica" class="table">
                     <thead>
@@ -58,8 +57,7 @@
                         <th></th>
                       </tr>
                     </thead>
-                          <%= ficha.fields_for :stock_medicas , :wrapper => false do |stock| %>
-
+                          <%= d.fields_for :stock_medicas , :wrapper => false do |stock| %>
                             <tr class="fields">
                               <td><%= stock.collection_select(:medicamento_id, @medicamentos, :id, :nombreMedi, {include_blank: 'Nombre del Medicamento' }, {:class=>'form-control'}) %></td>
                               <td><%= stock.text_field :cantidad, class: "form-control" %></td>
@@ -67,10 +65,10 @@
                             </tr>
                           <% end %>
                   </table>         
-           <%= ficha.submit 'Guardar' , class: "btn btn-success"%>
-           <%= link_to 'Atras', diagnosticos_path, class: "btn btn-info" %>        
-          <% end -%>
-  
+              <%end%>            
+           <%= d.submit 'Guardar' , class: "btn btn-success"%>
+           <%= link_to 'Atras', diagnosticos_path, class: "btn btn-info" %>  
+<% end %>
                  
   
 

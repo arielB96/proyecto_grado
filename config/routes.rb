@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   root :to => 'ficha_medicas#index'
   resources :areas
   resources :origens
-   get "ficha_medicas/consultas"
   resources :etnias
   resources :estado_civils
   resources :nivel_academicos
@@ -15,9 +14,11 @@ Rails.application.routes.draw do
   resources :ficha_medicas do
     resources :diagnosticos 
   end
-  # get 'ficha_medicas/consultas' => 'ficha_medicas#consultas', :as => :consultas
+  get 'diagnosticos/consultas' => 'diagnosticos#consultas', :as => :consultas
   resources :diagnosticos do
-    resources :ficha_docs
+    resources :ficha_docs do
+      resources :stock_medicas
+    end
   end
   resources :categoris
   resources :puesto_saluds do 

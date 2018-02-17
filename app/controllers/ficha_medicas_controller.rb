@@ -63,7 +63,7 @@ class FichaMedicasController < ApplicationController
 
     respond_to do |format|
       if @ficha_medica.save
-        format.html { redirect_to @ficha_medica, notice: 'Ficha medica was successfully created.' }
+        format.html { redirect_to ficha_medicas_url, notice: 'Ficha medica was successfully created.' }
         format.json { render :index, status: :created, location: @ficha_medica }
       else
         format.html { render :new }
