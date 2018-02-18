@@ -1,5 +1,15 @@
 <p id="notice"><%= notice %></p>
-
+<div class="row">
+<div class="col-sm-4">
+  <h2>Historial</h2>
+<% @diagnostico.ficha_docs.each do |f| %>
+  <p>
+    <strong>Motivo de la consulta:</strong>
+    <%= f.motivoConsul %>
+  </p>
+<% end %>
+</div>
+<div class="col-sm-8">
     <div class="row">
        <div class="col-sm-6">
         <strong>Fecha:</strong>
@@ -23,7 +33,7 @@
         <%= @diagnostico.ficha_medica.nombre %>
         <%= @diagnostico.ficha_medica.apellido %>
        </div>
-    </div><BR><BR>
+    </div><BR>
 <%= nested_form_for @diagnostico do |d|%>
   <%= d.fields_for :ficha_docs do |ficha|%>
                   <div class="row">
@@ -69,7 +79,5 @@
            <%= d.submit 'Guardar' , class: "btn btn-success"%>
            <%= link_to 'Atras', diagnosticos_path, class: "btn btn-info" %>  
 <% end %>
-                 
-  
-
+</div>
         

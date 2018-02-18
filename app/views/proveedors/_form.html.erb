@@ -1,0 +1,33 @@
+<%= form_with(model: proveedor, local: true) do |form| %>
+  <% if proveedor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(proveedor.errors.count, "error") %> prohibited this proveedor from being saved:</h2>
+
+      <ul>
+      <% proveedor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+ <div class="col-sm-3"></div>
+  <div class="col-sm-4">
+    <h4>Nueva Entrada</h4>
+     <div class="col">
+        <%= form.collection_select(:medicamento_id, @medicamentos, :id, :nombreMedi, {include_blank: 'Nombre del Medicamento' }, {:class=>'form-control'}) %>  
+     </div>
+      <div class="col">
+        <%= form.label :cantidad %>
+        <%= form.number_field :cantidad, id: :proveedor_cantidad, class: "form-control" %>
+      </div><br>
+
+      <div class="actions">
+        <%= form.submit "Guardar" ,class: "btn btn-success btn-xs" %>
+        <%= link_to 'Atras', proveedors_path,class: "btn btn-primary btn-xs" %>
+      </div>
+  </div>
+ <div class="col-sm-3"></div>
+</div>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180217020203) do
+ActiveRecord::Schema.define(version: 20180218184832) do
 
   create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "area"
@@ -125,6 +125,14 @@ ActiveRecord::Schema.define(version: 20180217020203) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "proveedors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "cantidad"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "medicamento_id"
+    t.index ["medicamento_id"], name: "index_proveedors_on_medicamento_id"
+  end
+
   create_table "puesto_saluds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre"
     t.string "contacto"
@@ -148,9 +156,7 @@ ActiveRecord::Schema.define(version: 20180217020203) do
     t.datetime "updated_at", null: false
     t.bigint "medicamento_id", null: false
     t.bigint "diagnostico_id"
-    t.bigint "ficha_doc_id"
     t.index ["diagnostico_id"], name: "index_stock_medicas_on_diagnostico_id"
-    t.index ["ficha_doc_id"], name: "index_stock_medicas_on_ficha_doc_id"
     t.index ["medicamento_id"], name: "index_stock_medicas_on_medicamento_id"
   end
 

@@ -7,6 +7,8 @@
     <tr>
       <th>Nombre Paciente</th>
       <th>Apellido</th>
+      <th>Medicamento</th>
+      <th>Cantidad</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,10 +18,12 @@
   <tbody>
     <% @stock_medicas.each do |stock_medica| %>
       <tr>
-        <td><%= stock_medica.ficha_doc.diagnostico.ficha_medica.nombre %></td>
-        <td><%= stock_medica.ficha_doc.diagnostico.ficha_medica.apellido %></td>
-          
+        <td><%= stock_medica.diagnostico.ficha_medica.nombre %></td>
+        <td><%= stock_medica.diagnostico.ficha_medica.apellido %></td>
+        <td><%= stock_medica.medicamento.nombreMedi %></td>  
         <td><span class= "badge-success"><%= stock_medica.cantidad %></span></td>
+
+
         <td><%= link_to 'Ver', stock_medica %></td>
         <td><%= link_to 'Editar', edit_stock_medica_path(stock_medica) %></td>
         <td><%= link_to 'Borrar', stock_medica, method: :delete, data: { confirm: 'Are you sure?' } %></td>

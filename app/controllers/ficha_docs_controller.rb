@@ -11,6 +11,7 @@ class FichaDocsController < ApplicationController
   # GET /ficha_docs/1.json
   def show
     @diagnosticos = Diagnostico.all
+    
   end
 
   # GET /ficha_docs/new

@@ -1,5 +1,5 @@
 class DiagnosticosController < ApplicationController
-  before_action :set_diagnostico, only: [:show, :edit, :update, :destroy, :guardar]
+  before_action :set_diagnostico, only: [:show, :edit, :update, :destroy]
 
   # GET /diagnosticos
   # GET /diagnosticos.json
@@ -10,15 +10,12 @@ class DiagnosticosController < ApplicationController
     @diagnosticos = Diagnostico.where(consultar: false)
   end
 
-  def guardar
-    @diagnostico = Diagnostico.find(params[:dignostico_id])
-    @ficha_doc = @diagnostico.ficha_docs.create(diagnostico_params)
-  end
-
   # GET /diagnosticos/1
   # GET /diagnosticos/1.json
   def show
     @medicamentos = Medicamento.all
+    @ficha_docs = FichaDoc.all
+    @diagnosticos = Diagnostico.all
     @stock_medica = @diagnostico.stock_medicas.build
     @ficha_doc = @diagnostico.ficha_docs.build
   end
@@ -65,7 +62,7 @@ class DiagnosticosController < ApplicationController
   respond_to do |format|
       if @diagnostico.update(diagnostico_params)
         @diagnostico.update_attributes({:consultar => false })
-        format.html { redirect_to diagnosticos_url, notice: 'Diagnostico Actualizado' }
+        format.html { redirect_to diagnosticos_url, notice: 'Consulta Guardado' }
       else
         format.html { render :show }
         msg = "Ocurrio un error"

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :proveedors
   resources :ficha_docs do
     resources :stock_medicas
   end
@@ -25,8 +26,8 @@ Rails.application.routes.draw do
     collection do get "getInfo"
     end
   end    
-  devise_for :models
-  devise_for :users
+  # devise_for :models
+  # devise_for :users
   # resources :layouts
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
