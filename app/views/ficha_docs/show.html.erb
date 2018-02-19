@@ -18,19 +18,20 @@
        <table id="" class="table">
             <thead>
              <tr>
+                <th>Fecha</th>
                 <th>Nombre del medicamento</th>
                 <th>Cantidad</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
-              <%= @diagnosticos.each do |p| %>
-               <tr class="fields">
-                <td><%= p.stock_medicas.cantidad %></td>
+              <% @stock_medicas.each do |p| %>
+               <tr>
+                <td><%= p.diagnostico.fecha %></td>
+                <td><%= p.medicamento.nombreMedi %></td>
+                <td><%= p.cantidad %></td>
                 
                </tr>
               <% end %>
             </tbody>
         </table>
 </div>
-

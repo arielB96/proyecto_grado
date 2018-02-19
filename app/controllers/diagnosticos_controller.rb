@@ -14,8 +14,8 @@ class DiagnosticosController < ApplicationController
   # GET /diagnosticos/1.json
   def show
     @medicamentos = Medicamento.all
-    @ficha_docs = FichaDoc.all
-    @diagnosticos = Diagnostico.all
+    @ficha_docs = Diagnostico.joins(:ficha_doc).where(ficha_medica:  @ficha_medica_id)
+    @diagnosticos = Diagnostico.joins(:ficha_docs).where(ficha_medica:  @ficha_medica_id)
     @stock_medica = @diagnostico.stock_medicas.build
     @ficha_doc = @diagnostico.ficha_docs.build
   end

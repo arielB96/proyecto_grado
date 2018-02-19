@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Ficha Docs</h1>
+<h1>Historial de Consultas</h1>
 
-<table class="table table-hover">
+<table id="table" class="table table-hover">
   <thead>
     <tr>
       <th>Nombre </th>
       <th>Apellido</th>
-      <th>Motivoconsul</th>
+      <th>Motivo Consulta</th>
       <th>Examenfisico</th>
       <th>Otrodiagnos</th>
       <th>Tratamiento</th>
@@ -21,7 +21,8 @@
     <% @ficha_docs.each do |ficha_doc| %>
       <tr>
         <td><%= ficha_doc.diagnostico.ficha_medica.nombre %></td>
-        <td></td>
+        <td><%= ficha_doc.diagnostico.ficha_medica.apellido %></td>
+        <td><%= ficha_doc.motivoConsul %></td>
         <td><%= ficha_doc.examenFisico %></td>
         <td><%= ficha_doc.otroDiagnos %></td>
         <td><%= ficha_doc.tratamiento %></td>
@@ -35,4 +36,41 @@
 
 <br>
 
-<%= link_to 'New Ficha Doc', new_ficha_doc_path %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#table').DataTable( {
+        responsive: true,
+        "bProcessing": true,
+        //"sPaginationType": "full_numbers",
+        "paging": true,
+        "iDisplayLength": 10,
+        "bPaginate": true,
+        "bSort": true,
+        "oLanguage": {
+            "oPaginate": {
+                "sPrevious": "←",
+                "sNext": "→",
+                "sLast": "»",
+                "sFirst": "«"
+            },
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando de _START_ al _END_ de _TOTAL_ registros",
+            //"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando del 0 al 0 de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar: ",
+            "sUrl": "",
+            "sInfoThousands": ".",
+            "sLoadingRecords": "Cargando...",
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    } );
+    } );
+</script>

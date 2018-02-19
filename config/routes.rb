@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   resources :proveedors
   resources :ficha_docs do
-    resources :stock_medicas
+    collection do
+      get 'search_bussine'
+      get 'table_search'
+    end
   end
   root :to => 'ficha_medicas#index'
   resources :areas

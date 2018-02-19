@@ -24,14 +24,13 @@
         <strong>Edad:</strong>
         <%= @ficha_medica.edad %>
       </div>
-      <!--<%= link_to 'Editar', edit_ficha_medica_path(@ficha_medica) %> |
-      <%= link_to 'Atras', ficha_medicas_path %>-->
-</div><BR><BR>
+
+</div><BR>
       <%= form_for([@ficha_medica, @ficha_medica.diagnosticos.build]) do |f| %>
   <div class="row">
           <div class="col-sm-3">
             <%= f.label :fecha , "Fecha" %>
-            <%= f.date_field :fecha, id: :diagnostico_fecha, class: "form-control",required: true %>
+            <%= f.date_field :fecha, id: :diagnostico_fecha, class: "form-control", required: true, :validate => true, :order => [:day, :month, :year]%>
           </div>
     
   </div>
@@ -128,9 +127,11 @@
             <%= f.check_box :consultar, id: :diagnostico_consultar, required: true %>
           </div>
 </div><BR>
-<DIV CLASS="col-sm-10"></div>
-<DIV CLASS="col-sm-2">
-            <%= f.submit 'Guardar', class: "btn btn-success" %>
-</DIV>
+<div class="row">
+  <DIV CLASS="col-sm-10"></div>
+  <DIV CLASS="col-sm-2">
+              <%= f.submit 'Guardar', class: "btn btn-success" %>
+  </DIV>
+</div>
     <%end%>
    

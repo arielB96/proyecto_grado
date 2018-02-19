@@ -1,16 +1,5 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
-<div class="col-sm-4">
-  <h2>Historial</h2>
-<% @diagnostico.ficha_docs.each do |f| %>
-  <p>
-    <strong>Motivo de la consulta:</strong>
-    <%= f.motivoConsul %>
-  </p>
-<% end %>
-</div>
-<div class="col-sm-8">
-    <div class="row">
        <div class="col-sm-6">
         <strong>Fecha:</strong>
         <%= @diagnostico.fecha %>

@@ -11,7 +11,7 @@ class FichaDocsController < ApplicationController
   # GET /ficha_docs/1.json
   def show
     @diagnosticos = Diagnostico.all
-    
+    @stock_medicas = StockMedica.where(diagnostico_id == ficha_doc.diagnostico_id)        
   end
 
   # GET /ficha_docs/new
