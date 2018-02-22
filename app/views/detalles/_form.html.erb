@@ -1,0 +1,17 @@
+<%= form_with(model: detalle, local: true) do |form| %>
+  <% if detalle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(detalle.errors.count, "error") %> prohibited this detalle from being saved:</h2>
+
+      <ul>
+      <% detalle.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

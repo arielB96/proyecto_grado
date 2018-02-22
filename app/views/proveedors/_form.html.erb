@@ -1,4 +1,4 @@
-<%= form_with(model: proveedor, local: true) do |form| %>
+<%= nested_form_for @proveedor do |form|%>
   <% if proveedor.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(proveedor.errors.count, "error") %> prohibited this proveedor from being saved:</h2>
@@ -12,22 +12,39 @@
   <% end %>
 
 <div class="row">
- <div class="col-sm-3"></div>
-  <div class="col-sm-4">
+ <div class="col-sm-2"></div>
+  <div class="col-xs-8">
     <h4>Nueva Entrada</h4>
-     <div class="col">
-        <%= form.collection_select(:medicamento_id, @medicamentos, :id, :nombreMedi, {include_blank: 'Nombre del Medicamento' }, {:class=>'form-control'}) %>  
-     </div>
-      <div class="col">
-        <%= form.label :cantidad %>
-        <%= form.number_field :cantidad, id: :proveedor_cantidad, class: "form-control" %>
-      </div><br>
-
+     <div class="col-xs-4">
+      <%= form.label :fecha, "Fecha de Entrada" %>
+      <%= form.date_field :fecha, id: :proveedor_fecha, class: "form-control", :validate => true, :order => [:day, :month, :year] %>
+    </div>
+<div class="row">
+                  <table id="stock_medica" class="table">
+                    <div>
+    <p class="btn-group-sm"><%= form.link_to_add "Agregar",:detalles, class: "glyphicon glyphicon-plus btn btn-success btn-xs",:data => { :target => "#stock_medica" } %></p>
+  </div>
+                    <thead>
+                      <tr>
+                        <th>Medicamentos</th>
+                        <th>Cantidad</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                          <%= form.fields_for :detalles , :wrapper => false do |stock| %>
+                            <tr class="fields">
+                              <td><%= stock.collection_select(:medicamento_id, Medicamento.all, :id, :nombreMedi, {include_blank: 'Nombre del Medicamento' }, {:class=>'form-control'}) %></td>
+                              <td><%= stock.text_field :cantidad, class: "form-control" %></td>
+                              <td><%= stock.link_to_remove "", class: "glyphicon glyphicon-minus-sign btn-danger" %></td>
+                            </tr>
+                          <% end %>
+                  </table>
+</div>         
       <div class="actions">
         <%= form.submit "Guardar" ,class: "btn btn-success btn-xs" %>
         <%= link_to 'Atras', proveedors_path,class: "btn btn-primary btn-xs" %>
       </div>
   </div>
- <div class="col-sm-3"></div>
+ <div class="col-sm-2"></div>
 </div>
 <% end %>

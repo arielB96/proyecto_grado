@@ -1,13 +1,28 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Nombre del Medicamento:</strong>
-  <%= @proveedor.medicamento.nombreMedi %>
+  <strong>Fecha de Entrada:</strong>
+  <%= @proveedor.fecha %>
 </p>
-<p>
-  <strong>Cantidad:</strong>
-  <%= @proveedor.cantidad %>
-</p>
+<h3>Medicamentos</h3>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Nombre Medicamento</th>
+			<th>Cantidad</th>
+		</tr>
+	</thead>
+	<tbody>
+	 <% @proveedor.detalles.each do |d|%>
+		<tr>
+			<td><%= d.medicamento.nombreMedi%></td>
+			<td><%= d.medicamento.cantidad%></td>
+		</tr>
+	 <%end%>
+	</tbody>
+</table>
+
+
 
 <%= link_to 'Editar', edit_proveedor_path(@proveedor) ,class: "btn btn-warning btn-xs"%> |
 <%= link_to 'Atras', proveedors_path,class: "btn btn-primary btn-xs" %>

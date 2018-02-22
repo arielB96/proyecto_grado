@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :detalles
+  devise_for :models
   resources :proveedors
   resources :ficha_docs do
     collection do

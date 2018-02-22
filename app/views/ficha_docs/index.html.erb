@@ -11,9 +11,6 @@
       <th>Examenfisico</th>
       <th>Otrodiagnos</th>
       <th>Tratamiento</th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -26,9 +23,6 @@
         <td><%= ficha_doc.examenFisico %></td>
         <td><%= ficha_doc.otroDiagnos %></td>
         <td><%= ficha_doc.tratamiento %></td>
-        <td><%= link_to 'Show', ficha_doc %></td>
-        <td><%= link_to 'Edit', edit_ficha_doc_path(ficha_doc) %></td>
-        <td><%= link_to 'Destroy', ficha_doc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

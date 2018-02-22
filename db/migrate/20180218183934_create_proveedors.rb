@@ -1,7 +1,7 @@
 class CreateProveedors < ActiveRecord::Migration[5.1]
   def change
     create_table :proveedors do |t|
-      t.integer :cantidad
+      t.date :fecha
 
       t.timestamps
     end

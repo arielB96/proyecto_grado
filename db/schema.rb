@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180218184832) do
+ActiveRecord::Schema.define(version: 20180222130708) do
 
   create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "area"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 20180218184832) do
 
   create_table "categoris", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "tipo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "detalles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -126,6 +131,7 @@ ActiveRecord::Schema.define(version: 20180218184832) do
   end
 
   create_table "proveedors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date "fecha"
     t.integer "cantidad"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

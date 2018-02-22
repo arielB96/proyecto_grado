@@ -8,11 +8,10 @@
 <table id="medi_tabla"  class="table table-hover">
   <thead>
     <tr>
-      <th>Fecha de Entrada</th>
-      <th>Fecha de Vencimiento</th>
       <th>Nombre</th>
       <th>Descripcion</th>
       <th>Cantidad</th>
+      <th>Fecha de Vencimiento</th>
       <th></th>
       <th></th>
     </tr>
@@ -21,12 +20,10 @@
   <tbody>
     <% @medicamentos.each do |medicamento| %>
       <tr>
-        <td><%= medicamento.fechaEntrada %></td>
-        <td><%= medicamento.fechaVencimiento %></td>
         <td><%= medicamento.nombreMedi %></td>
         <td><%= medicamento.descripcion %></td>
         <td><span class="badge badge-pill badge-primary"><%= medicamento.cantidad %></span></td>
-
+        <td><%= medicamento.fechaVencimiento %></td>
         <td><%= link_to 'Show', medicamento %></td>
         <td><%= link_to 'Edit', edit_medicamento_path(medicamento) %></td>
         <td><%= link_to 'Destroy', medicamento, method: :delete, data: { confirm: 'Are you sure?' } %></td>

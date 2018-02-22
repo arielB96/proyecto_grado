@@ -1,8 +1,4 @@
 class Proveedor < ApplicationRecord
-	belongs_to :medicamento
-	after_save :sumar_medicamentos
-	def sumar_medicamentos
-	    self.medicamento.cantidad += self.cantidad
-	    self.medicamento.save
-	 end
+	has_many :detalles
+	accepts_nested_attributes_for :detalles,  allow_destroy: true
 end

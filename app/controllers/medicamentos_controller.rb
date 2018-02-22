@@ -69,6 +69,6 @@ class MedicamentosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def medicamento_params
-      params.require(:medicamento).permit(:nombreMedi, :descripcion, :cantidad, :fechaEntrada, :fechaVencimiento)
+      params.require(:medicamento).permit(:fechaVencimiento, :nombreMedi, :descripcion, :cantidad)
     end
 end
